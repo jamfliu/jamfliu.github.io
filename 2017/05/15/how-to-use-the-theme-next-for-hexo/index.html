@@ -1,0 +1,1391 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hexo,next,how,第三方插件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/lzffavicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="之前使用的hexo的jacman,但是发现还是没hexo的nexT的简约，而且nexT本身就自配置了各种第三方插件，你需要开启和设置对应一些你的参数即可。所以果断选他。这篇博客主要是简单带过并且补充一些我走过坑和一些注意事项。欢迎搭建评论和谈论交流。">
+<meta name="keywords" content="hexo,next,how,第三方插件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【原创】如何使用hexo的NexT主题">
+<meta property="og:url" content="http://jamfliu.github.io/2017/05/15/how-to-use-the-theme-next-for-hexo/index.html">
+<meta property="og:site_name" content="留阵～风～">
+<meta property="og:description" content="之前使用的hexo的jacman,但是发现还是没hexo的nexT的简约，而且nexT本身就自配置了各种第三方插件，你需要开启和设置对应一些你的参数即可。所以果断选他。这篇博客主要是简单带过并且补充一些我走过坑和一些注意事项。欢迎搭建评论和谈论交流。">
+<meta property="og:image" content="http://jamfliu.github.io/images/pages/hexo_desciption.png">
+<meta property="og:updated_time" content="2017-05-16T19:42:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【原创】如何使用hexo的NexT主题">
+<meta name="twitter:description" content="之前使用的hexo的jacman,但是发现还是没hexo的nexT的简约，而且nexT本身就自配置了各种第三方插件，你需要开启和设置对应一些你的参数即可。所以果断选他。这篇博客主要是简单带过并且补充一些我走过坑和一些注意事项。欢迎搭建评论和谈论交流。">
+<meta name="twitter:image" content="http://jamfliu.github.io/images/pages/hexo_desciption.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jamfliu.github.io/2017/05/15/how-to-use-the-theme-next-for-hexo/"/>
+
+
+
+
+
+  <title>【原创】如何使用hexo的NexT主题 | 留阵～风～</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3fb9e4d48bc478a2892d60f9e3fe51be";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">留阵～风～</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人咬得菜根，则百事可做</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jamfliu.github.io/2017/05/15/how-to-use-the-theme-next-for-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jamefeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lzf.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="留阵～风～">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【原创】如何使用hexo的NexT主题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T13:57:41+08:00">
+                2017-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/05/15/how-to-use-the-theme-next-for-hexo/" class="leancloud_visitors" data-flag-title="【原创】如何使用hexo的NexT主题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+
+
+  <span class="post-letters-count">
+    &nbsp; | &nbsp;
+    <span> 字</span>
+  </span>
+
+
+
+
+
+          
+
+          
+              <div class="post-description">
+                  之前使用的hexo的jacman,但是发现还是没hexo的nexT的简约，而且nexT本身就自配置了各种第三方插件，你需要开启和设置对应一些你的参数即可。所以果断选他。这篇博客主要是简单带过并且补充一些我走过坑和一些注意事项。欢迎搭建评论和谈论交流。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><a href="http://theme-next.iissnan.com" target="_blank" rel="external">NexT</a>: 是hexo的一个主题，你可以换各种hexo主题，而保持原有内容不变。</p>
+<p><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a>: 是高效的静态站点生成框架，基于 Node.js。 通过 Hexo 你可以轻松地使用 Markdown 编写文章，除了 Markdown 本身的语法之外，还可以使用 Hexo 提供的 标签插件 来快速的插入特定形式的内容。</p>
+<p>　　特点：超快速度(渲染速度)，支持markdown,一键部署，丰富的插件</p>
+<p><a href="https://www.npmjs.com/" target="_blank" rel="external">npm</a>: 是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题</p>
+<ol>
+<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。  </li>
+<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。 </li>
+<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
+</ol>
+<p><font style="background-color:#2780e3;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">站点配置文件</font>:一份位于站点根目录下，主要包含 Hexo 本身的配置。位置：your-hexo-site/_config.yml</p>
+<p><font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>:位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。位置: your-hexo-site/themes/主题名/_config.yml。例如next的就是your-hexo-site/themes/next/_config.yml</p>
+<hr>
+<h2 id="Hexo安装指南"><a href="#Hexo安装指南" class="headerlink" title="Hexo安装指南"></a>Hexo安装指南</h2><p>###条件<br>　　先安装好Git和Node.js<br>　　（详细的安装过程见<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">官方教程</a>）</p>
+<h3 id="Hexo的安装"><a href="#Hexo的安装" class="headerlink" title="Hexo的安装"></a>Hexo的安装</h3><h4 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1.安装Hexo"></a>1.安装Hexo</h4><p>　　所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">＄npm install -g hexo-<span class="keyword">cli</span></div></pre></td></tr></table></figure>
+<h4 id="2-初始化Hexo"><a href="#2-初始化Hexo" class="headerlink" title="2.初始化Hexo"></a>2.初始化Hexo</h4><p>　　先转到自己自定的文件，作为Hexo的根目录（这时候可以省略<folder>的参数）</folder></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> hexo init &lt;folder&gt;</span></div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &lt;folder&gt;</span></div><div class="line"><span class="meta">$</span><span class="bash"> npm install</span></div></pre></td></tr></table></figure>
+<hr>
+<h3 id="Hexo主题安装"><a href="#Hexo主题安装" class="headerlink" title="Hexo主题安装"></a>Hexo主题安装</h3><p>　　Hexo 安装主题的方式非常简单，只需要将主题文件拷贝至站点目录的 themes 目录下， 然后修改下配置文件即可。</p>
+<h3 id="Hexo目录简介"><a href="#Hexo目录简介" class="headerlink" title="Hexo目录简介"></a>Hexo目录简介</h3><p>详细看图片：</p>
+<p><img src="/images/pages/hexo_desciption.png" alt="image"></p>
+<h2 id="NexT主题安装指南"><a href="#NexT主题安装指南" class="headerlink" title="NexT主题安装指南"></a>NexT主题安装指南</h2><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><p>　　先安装好Git和hexo<br>　　（详细的安装过程可参考<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">官方教程</a>）（本人的是mac os x，直接brew install指令即可）</p>
+<h3 id="主题安装步骤"><a href="#主题安装步骤" class="headerlink" title="主题安装步骤"></a>主题安装步骤</h3><h4 id="1-下载主题"><a href="#1-下载主题" class="headerlink" title="1.下载主题"></a>1.下载主题</h4><p>【方式一:Git的方式】<br>　在终端窗口下，定位到 Hexo 站点目录下。使用 Git checkout 代码：　　<br>　<br>（推荐此方式，之后的更新可以通过 git pull 来快速更新， 而不用再次下载压缩包替换。）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> your-hexo-site</span></div><div class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span></div></pre></td></tr></table></figure>
+<p>【方式二:下载稳定版本】</p>
+<ol>
+<li><p>前往 NexT 版本 <a href="https://github.com/iissnan/hexo-theme-next/releases" target="_blank" rel="external">发布页面</a>。</p>
+</li>
+<li><p>选择你所需要的版本，下载 Download 区域下的 Source Code (zip) 到本地。例如，下载 v5.1.1 版本</p>
+</li>
+<li><p>解压所下载的压缩包至站点的 themes 目录下， 并将 解压后的文件夹名称（hexo-theme-next-5.1.1）更改为 next</p>
+</li>
+</ol>
+<h4 id="2-站点配置主题"><a href="#2-站点配置主题" class="headerlink" title="2.站点配置主题"></a>2.站点配置主题</h4><p>打开<font style="background-color:#2780e3;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">站点配置文件</font>找到 theme 字段，并将其值更改为 next。</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">theme: <span class="keyword">next</span></div></pre></td></tr></table></figure>
+<p>到此，NexT 主题安装完成。下一步我们将验证主题是否正确启用。在切换主题之后、验证之前， 我们最好使用 hexo clean 来清除 Hexo 的缓存。</p>
+<p><strong>注意事项</strong>：yml每项配置冒号:后面需要加空格的</p>
+<h4 id="3-验证主题"><a href="#3-验证主题" class="headerlink" title="3.验证主题"></a>3.验证主题</h4><p>在hexo站点目录下，启动本地站点</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
+<p>可简写”<strong>hexo s</strong>“, 可以开启debug模式 “<strong>hexo server -debug</strong>“.</p>
+<p>此时即可使用浏览器访问 <a href="http://localhost:4000，检查站点是否正确运行。" target="_blank" rel="external">http://localhost:4000，检查站点是否正确运行。</a></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>（可参考[官方教程](<a href="https://hexo.io/zh-cn/docs/commands.html）" target="_blank" rel="external">https://hexo.io/zh-cn/docs/commands.html）</a></p>
+<h4 id="1-新建一篇文章"><a href="#1-新建一篇文章" class="headerlink" title="1.新建一篇文章"></a>1.新建一篇文章</h4><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">new</span> [layout] &lt;<span class="built_in">title</span>&gt;</div></pre></td></tr></table></figure>
+<p>　　新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。</p>
+<h4 id="2-发表草稿"><a href="#2-发表草稿" class="headerlink" title="2.发表草稿"></a>2.发表草稿</h4><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">hexo </span><span class="string">publish </span>[<span class="string">layout]</span> &lt;<span class="string">filename&gt;</span>     <span class="comment">#发表草稿</span></div><div class="line"><span class="string">hexo </span><span class="built_in">--draft</span>                         <span class="comment">#显示草稿的文章</span></div></pre></td></tr></table></figure>
+<h4 id="3-生成静态文件"><a href="#3-生成静态文件" class="headerlink" title="3.生成静态文件"></a>3.生成静态文件</h4><p>　　把markdown、主题等生成静态文件</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">generate</span></div></pre></td></tr></table></figure>
+<p>可简写 “<strong>hexo g</strong>“， 通过””<strong>hexo deploy -g</strong>“也是生成静态文件。<br>   “<strong>hexo generate -d</strong>“ 生成后立即部署。</p>
+<h4 id="4-启动服务器"><a href="#4-启动服务器" class="headerlink" title="4.启动服务器"></a>4.启动服务器</h4><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
+<p>　　启动服务器。可简写 “”<strong>hexo s</strong>“，默认情况下，访问网址为： <a href="http://localhost:4000/。" target="_blank" rel="external">http://localhost:4000/。</a><br>   选项<strong>-p, –port</strong>–重设端口，<br>   <strong>-s, –static</strong>–只使用静态文件<br>，<strong>-l, –log</strong>启动日记记录，使用覆盖记录格式</p>
+<h4 id="5-部署网站"><a href="#5-部署网站" class="headerlink" title="5.部署网站"></a>5.部署网站</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">hexo deploy</span></div></pre></td></tr></table></figure>
+<p>　　部署网站到github上。选项<strong>-g, –generate</strong>部署之前预先生成静态文件</p>
+<h4 id="6-清除缓存文件-db-json-和已生成的静态文件-public-。"><a href="#6-清除缓存文件-db-json-和已生成的静态文件-public-。" class="headerlink" title="6.清除缓存文件 (db.json) 和已生成的静态文件 (public)。"></a>6.清除缓存文件 (db.json) 和已生成的静态文件 (public)。</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">hexo clean</span></div></pre></td></tr></table></figure>
+<p>清除缓存文件 (db.json) 和已生成的静态文件 (public)。<br>在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</p>
+<h4 id="7-列出网站资料"><a href="#7-列出网站资料" class="headerlink" title="7.列出网站资料"></a>7.列出网站资料</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="built_in">list</span> &lt;type&gt;</div></pre></td></tr></table></figure>
+<h2 id="NexT主题定制化以及第三方配置指南"><a href="#NexT主题定制化以及第三方配置指南" class="headerlink" title="NexT主题定制化以及第三方配置指南"></a>NexT主题定制化以及第三方配置指南</h2><h3 id="我的主题定制的情况："><a href="#我的主题定制的情况：" class="headerlink" title="我的主题定制的情况："></a>我的主题定制的情况：</h3><p>　　修改<font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>的。本身NexT主题里面有配置很多的第三方插件配置，所以只需要打开和对应配置你的一些App_ID即可。</p>
+<h4 id="1-修改主题scheme"><a href="#1-修改主题scheme" class="headerlink" title="1.修改主题scheme"></a>1.修改主题scheme</h4><pre><code>scheme: Pisce
+</code></pre><h4 id="2-设置代码高亮"><a href="#2-设置代码高亮" class="headerlink" title="2.设置代码高亮"></a>2.设置代码高亮</h4><pre><code>highlight_theme: night bright
+</code></pre><h4 id="3-修改侧边栏链接"><a href="#3-修改侧边栏链接" class="headerlink" title="3.修改侧边栏链接"></a>3.修改侧边栏链接</h4><p>链接放置在 social 字段下，一行一个链接。其键值格式是 显示文本: 链接地址</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">social</span>:</div><div class="line">  #<span class="attribute">LinkLabel</span>: Link</div><div class="line">  <span class="attribute">GitHub</span>: <span class="attribute">https</span>:<span class="comment">//github.com/jamfliu</span></div><div class="line">  微博: <span class="attribute">http</span>:<span class="comment">//weibo.com/jamfliu</span></div><div class="line">  豆瓣: <span class="attribute">http</span>:<span class="comment">//douban.com/people/jamfliu</span></div><div class="line">  知乎: <span class="attribute">http</span>:<span class="comment">//www.zhihu.com/people/jamfliu</span></div></pre></td></tr></table></figure>
+<h4 id="4-设置头像和site的favicon"><a href="#4-设置头像和site的favicon" class="headerlink" title="4.设置头像和site的favicon"></a>4.设置头像和site的favicon</h4><p>  修改字段 avatar， 值设置成头像的链接地址。其中，头像的链接地址可以是：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">avatar:</span> images/lzf.png</div></pre></td></tr></table></figure>
+<p>下面是设置favicon。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">favicon:</span> images/lzffavicon.ico</div></pre></td></tr></table></figure>
+<h3 id="我的第三方插件定制的情况："><a href="#我的第三方插件定制的情况：" class="headerlink" title="我的第三方插件定制的情况："></a>我的第三方插件定制的情况：</h3><h4 id="1-统计阅读量"><a href="#1-统计阅读量" class="headerlink" title="1.统计阅读量"></a>1.统计阅读量</h4><p>　　原本我是申请了leancloud的appId和appKey，后面发现不蒜子统计中也包含了阅读量，所以我就配置但没用。</p>
+<p> <strong>方式一</strong>：使用leancloud<br>  首先申请它的AppID以及AppKey，在next的主题配置文件中找到leancloud，然后配置，主要是配置<strong>enable: true</strong>,然后填入你的AppID以及AppKey</p>
+<p> <strong>方式二</strong>：使用不蒜子统计中的page_pv项<br>    直接使用<strong>enable: true</strong>即可</p>
+<h4 id="2-增加评论功能"><a href="#2-增加评论功能" class="headerlink" title="2.增加评论功能"></a>2.增加评论功能</h4><p> 之前使用的多说已经要停了，所以改用了DISQUS，但是发现在国内的网络加载它的js老超时，果断换了一个，本想还网易云跟帖的，但是注册老有问题，而且支持的社交少。选了韩国的来必力，还算挺好用的，注册都不麻烦，就是获取验证码的时候是韩文有点恶心，不是全程中文的。</p>
+<p>   申请<a href="https://livere.com/" target="_blank" rel="external">来必力</a>的你自己的安装代码，注册完取data-uid里面的代码。然后设置livere_uid</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">livere_uid:</span> MTAyMC8y11222Y3NS800000</div></pre></td></tr></table></figure>
+<h4 id="3-统计自己网站的流量情况"><a href="#3-统计自己网站的流量情况" class="headerlink" title="3.统计自己网站的流量情况"></a>3.统计自己网站的流量情况</h4><p><strong>  1) 不蒜子统计 </strong></p>
+<p>这个不需要去注册，打开即可可以统计本站点的总的pv和uv量，也可以统计单个页面的pv量。</p>
+<p>编辑<font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>中的busuanzi_count的配置项。<br> 当”<strong>enable: true</strong>“时，代表开启全局开关。若site_uv、site_pv、page_pv的值均为false时，不蒜子仅作记录而不会在页面上显示。</p>
+<p><strong>  2) 百度统计 </strong></p>
+<p>为了后续方便分析，增加了百度统计，使用了百度统计，并不会给网站速度带慢的情况。</p>
+<p>申请你的自己的错误码，然后设置”<strong>baidu_analytics</strong>“为你自己的脚本ID即可</p>
+<h4 id="4-增加搜索功能-即站内搜索"><a href="#4-增加搜索功能-即站内搜索" class="headerlink" title="4.增加搜索功能,即站内搜索"></a>4.增加搜索功能,即站内搜索</h4><p> NexT主题支持集成 Swiftype、 微搜索、Local Search 和 Algolia,Swiftype和Algolia都只有一段时间的试用期，可以采用Hexo提供的Local Search,原理是通过hexo-generator-search插件在本地生成一个search.xml文件，搜索的时候从这个文件中根据关键字检索出相应的链接。</p>
+<p><strong> 1） 安装 hexo-generator-searchdb，在站点的根目录下执行以下命令</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-generator-searchdb <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<p><strong> 2） 在<font style="background-color:#2780e3;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">站点配置文件</font>末尾中新增下面的配置项</strong></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">search:</span></div><div class="line"><span class="symbol">  path:</span> search.xml</div><div class="line"><span class="symbol">  field:</span> post</div><div class="line"><span class="symbol">  format:</span> html</div><div class="line"><span class="symbol">  limit:</span> <span class="number">10000</span></div></pre></td></tr></table></figure>
+<p><strong> 3） 在<font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>启动本地搜索</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">local_search:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>【过程中遇到的问题】：查不了，发现是无生成search.xml<br> 也没有报错，似乎是node的版本不支持，我通过 npm upgrade和更新brew upgrade node[我的是mac os]来解决</p>
+<h4 id="5-内容分享功能"><a href="#5-内容分享功能" class="headerlink" title="5.内容分享功能"></a>5.内容分享功能</h4><p>　　百度分析在https好像有点问题，使用了JiaThis，但是好像也不稳定，暂时先开着。</p>
+<p>　　编辑 <font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>， 添加/修改字段 jiathis，值为 true。</p>
+<h4 id="6-字数统计功能"><a href="#6-字数统计功能" class="headerlink" title="6.字数统计功能"></a>6.字数统计功能</h4><p><strong> 1） 安装hexo-wordcount，在站点的根目录下执行以下命令</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-wordcount <span class="comment">--save</span></div></pre></td></tr></table></figure>
+<p> <strong>2）修改配置文件</strong></p>
+<p> 为了方便地开启和关闭字数统计功能，我们需要在配置文件（站点配置文件或主题配置文件均可）中添加一个键值对：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 开启字数统计</span></div><div class="line"><span class="attr">word_count:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p> <strong>3）修改主题的swig布局，themes/next/layout/_macro/post.swig</strong></p>
+<p>  (看了这个swig，似乎默认支持的，虽然字段和结构不一样，但是我怎么配都不成功，所以新增了)</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> theme.word_count %&#125;</span><span class="xml"></span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"post-letters-count"</span>&gt;</span></div><div class="line">    &amp;nbsp; | &amp;nbsp;</div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="template-variable">&#123;&#123; wordcount(post.content) &#125;&#125;</span><span class="xml"> 字<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></div><div class="line">  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span></div></pre></td></tr></table></figure>
+<h3 id="出现过的问题汇总："><a href="#出现过的问题汇总：" class="headerlink" title="出现过的问题汇总："></a>出现过的问题汇总：</h3><p>出现解决较久的问题有：</p>
+<h4 id="1-启动的时候发起请求的时候报错ENOENT-no-such-file-or-directory"><a href="#1-启动的时候发起请求的时候报错ENOENT-no-such-file-or-directory" class="headerlink" title="1.启动的时候发起请求的时候报错ENOENT, no such file or directory "></a><strong>1.启动的时候发起请求的时候报错ENOENT, no such file or directory </strong></h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">INFO  Hexo is running at http:<span class="comment">//0.0.0.0:4000/. Press Ctrl+C to stop.</span></div><div class="line">Unhandled rejection Error: ENOENT, no such file or directory <span class="string">'/Users/liuzhenfeng/git/blog_hexo/themes/next/layout/_scripts/schemes/.swig'</span></div><div class="line">    at Error (native)</div><div class="line">    at Object<span class="selector-class">.fs</span><span class="selector-class">.openSync</span> (fs<span class="selector-class">.js</span>:<span class="number">500</span>:<span class="number">18</span>)</div><div class="line">    at Object<span class="selector-class">.fs</span><span class="selector-class">.readFileSync</span> (fs<span class="selector-class">.js</span>:<span class="number">352</span>:<span class="number">15</span>)</div><div class="line">    at Object<span class="selector-class">.ret</span><span class="selector-class">.load</span> (/Users/liuzhenfeng/git/blog_hexo/node_modules/hexo/node_modules/swig/lib/loaders/filesystem<span class="selector-class">.js</span>:<span class="number">55</span>:<span class="number">15</span>)</div><div class="line">    ....</div><div class="line">    at process._tickCallback (node<span class="selector-class">.js</span>:<span class="number">355</span>:<span class="number">11</span>)</div></pre></td></tr></table></figure>
+<h5 id="gt-原因："><a href="#gt-原因：" class="headerlink" title="==&gt;原因："></a><strong>==&gt;原因：</strong></h5><p>  配置项的冒号后面无空格，比如错误的配置：（后面少了一个空格）</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">AppID:</span>XXX</div></pre></td></tr></table></figure>
+<p>正确的配置是冒号后面加空格，如下：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">AppID:</span> XXX</div></pre></td></tr></table></figure>
+<h4 id="2-执行-“npm-install-hexo-generator-searchdb-–save“时，报如下的错误"><a href="#2-执行-“npm-install-hexo-generator-searchdb-–save“时，报如下的错误" class="headerlink" title="2.执行 “npm install hexo-generator-searchdb –save“时，报如下的错误"></a>2.执行 “<strong>npm install hexo-generator-searchdb –save</strong>“时，报如下的错误</h4><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm WARN engine hexo-generator-searchdb<span class="symbol">@1</span><span class="number">.0</span><span class="number">.7</span>: wanted: &#123;<span class="string">"node"</span>:<span class="string">"&gt;= 4.2.2"</span>&#125; (current: &#123;<span class="string">"node"</span>:<span class="string">"0.12.7"</span>,<span class="string">"npm"</span>:<span class="string">"2.11.3"</span>&#125;)</div><div class="line">hexo-generator-searchdb<span class="symbol">@1</span><span class="number">.0</span><span class="number">.7</span> node_modules/hexo-generator-searchdb</div><div class="line">├── utils-merge<span class="symbol">@1</span><span class="number">.0</span><span class="number">.0</span></div><div class="line">├── striptags<span class="symbol">@3</span><span class="number">.0</span><span class="number">.1</span></div><div class="line">└── ejs<span class="symbol">@1</span><span class="number">.0</span><span class="number">.0</span></div></pre></td></tr></table></figure>
+<p>我通过 npm upgrade和更新brew upgrade node[我的是mac os]来解决，发现都是失败了，后来确定node是指nodejs就找了nodejs的更新方式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">第一步：首先安装n模块：</span></div><div class="line">npm install -g n</div><div class="line"><span class="meta">#</span><span class="bash">第二步：升级node.js到最新稳定版</span></div><div class="line">n stable</div></pre></td></tr></table></figure>
+<p>网上说这种解决办法有问题，所以要卸载干净之后重装</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">brew uninstall node  <span class="comment">#卸载，但是重新安装是会提示卸载不干净，需要额外删除一些</span></div><div class="line"><span class="comment">#以下是额外删除，主要根据错误提示</span></div><div class="line">rm -f /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">dtrace</span>/<span class="title">node</span>.<span class="title">d</span></span></div><div class="line">rm -f /usr/local/share/systemtap/tapset/node.stp</div><div class="line">rm /usr/local/share/man/man1/node.<span class="number">1</span></div><div class="line">rm -rf /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span></span></div></pre></td></tr></table></figure>
+<h4 id="3-执行hexo操作时，报ERROR-Script-load-failed-exturl-js"><a href="#3-执行hexo操作时，报ERROR-Script-load-failed-exturl-js" class="headerlink" title="3.执行hexo操作时，报ERROR Script load failed(exturl.js)"></a>3.执行hexo操作时，报ERROR Script load failed(exturl.js)</h4><p>情况：执行hexo操作时，报ERROR Script load failed: themes/next/scripts/tags/exturl.js<br>解决办法：重新安装hexo-util模块<br><figure class="highlight q"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -- <span class="built_in">save</span>-<span class="built_in">dev</span> hexo-util</div></pre></td></tr></table></figure></p>
+<h4 id="4-报错：ERROR-Plugin-load-failed-hexo-git-backup"><a href="#4-报错：ERROR-Plugin-load-failed-hexo-git-backup" class="headerlink" title="4.报错：ERROR Plugin load failed: hexo-git-backup"></a>4.报错：ERROR Plugin load failed: hexo-git-backup</h4><p>解决办法：重新安装hexo-git-backup模块<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm <span class="keyword">install</span> hexo-git-<span class="keyword">backup</span> <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<h4 id="5-报错：ERROR-Deployer-not-found-git"><a href="#5-报错：ERROR-Deployer-not-found-git" class="headerlink" title="5.报错：ERROR Deployer not found: git"></a>5.报错：ERROR Deployer not found: git</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> npm install hexo-deployer-git --save</span></div></pre></td></tr></table></figure>
+<h4 id="6-报错：Template-render-error-unknown-path"><a href="#6-报错：Template-render-error-unknown-path" class="headerlink" title="6.报错：Template render error: (unknown path)"></a>6.报错：Template render error: (unknown path)</h4><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">FATAL Something's wrong. Maybe you can find the solution here: http:<span class="comment">//hexo.io/docs/troubleshooting.html</span></div><div class="line">Template render <span class="built_in">error</span>: (unknown path) [<span class="keyword">Line</span> <span class="number">55</span>, Column <span class="number">232</span>]</div><div class="line">  unknown block tag: <span class="keyword">endif</span></div><div class="line">    at Object.exports.prettifyError (/Users/liuzhenfeng/git/blog_hexo/node_modules/nunjucks/src/<span class="keyword">lib</span>.js:<span class="number">34</span>:<span class="number">15</span>)</div></pre></td></tr></table></figure>
+<p>报这个错误的时候，比较容易确定是我心中md文件出问题了，但是具体是什么错误，一头雾水，严重影响到我的进度，m这个错误所指向的js我是没接触过的。最终我用了打印md文件前多少行，来确定第几行出错了。</p>
+<h5 id="gt-原因：-1"><a href="#gt-原因：-1" class="headerlink" title="==&gt;原因："></a><strong>==&gt;原因：</strong></h5><p>在字数统计功能的说明修改swig文件的的代码不小心动了一个字符，把那个统计文章字数的那段代码的”{“ –&gt; “&gt;”导致的报错 。改回去即可修复。</p>
+<p><br></p>
+<p><em>PS:有任何关于的问题，欢迎来评论讨论交流。</em></p>
+<h2 id="参考网站"><a href="#参考网站" class="headerlink" title="参考网站"></a>参考网站</h2><ol>
+<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo的官方文档</a></li>
+<li><a href="http://theme-next.iissnan.com" target="_blank" rel="external">NexT的官方文档</a></li>
+<li><a href="https://eason-yang.com/2016/11/05/add-word-count-to-hexo-next/" target="_blank" rel="external">为Hexo NexT主题添加字数统计功能</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+            <a href="/tags/next/" rel="tag"># next</a>
+          
+            <a href="/tags/how/" rel="tag"># how</a>
+          
+            <a href="/tags/第三方插件/" rel="tag"># 第三方插件</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/29/how-to-use-jacman/" rel="next" title="［转］如何使用 Jacman 主题">
+                <i class="fa fa-chevron-left"></i> ［转］如何使用 Jacman 主题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODY3NS81MjQ2"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/lzf.png"
+               alt="jamefeng" />
+          <p class="site-author-name" itemprop="name">jamefeng</p>
+           
+              <p class="site-description motion-element" itemprop="description">人是前行的</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jamfliu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/jamfliu" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo安装指南"><span class="nav-number">2.</span> <span class="nav-text">Hexo安装指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo的安装"><span class="nav-number">2.1.</span> <span class="nav-text">Hexo的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安装Hexo"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-初始化Hexo"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.初始化Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo主题安装"><span class="nav-number">2.2.</span> <span class="nav-text">Hexo主题安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo目录简介"><span class="nav-number">2.3.</span> <span class="nav-text">Hexo目录简介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NexT主题安装指南"><span class="nav-number">3.</span> <span class="nav-text">NexT主题安装指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件"><span class="nav-number">3.1.</span> <span class="nav-text">条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题安装步骤"><span class="nav-number">3.2.</span> <span class="nav-text">主题安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-下载主题"><span class="nav-number">3.2.1.</span> <span class="nav-text">1.下载主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-站点配置主题"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.站点配置主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-验证主题"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.验证主题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">3.3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-新建一篇文章"><span class="nav-number">3.3.1.</span> <span class="nav-text">1.新建一篇文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-发表草稿"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.发表草稿</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-生成静态文件"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.生成静态文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-启动服务器"><span class="nav-number">3.3.4.</span> <span class="nav-text">4.启动服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-部署网站"><span class="nav-number">3.3.5.</span> <span class="nav-text">5.部署网站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-清除缓存文件-db-json-和已生成的静态文件-public-。"><span class="nav-number">3.3.6.</span> <span class="nav-text">6.清除缓存文件 (db.json) 和已生成的静态文件 (public)。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-列出网站资料"><span class="nav-number">3.3.7.</span> <span class="nav-text">7.列出网站资料</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NexT主题定制化以及第三方配置指南"><span class="nav-number">4.</span> <span class="nav-text">NexT主题定制化以及第三方配置指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我的主题定制的情况："><span class="nav-number">4.1.</span> <span class="nav-text">我的主题定制的情况：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-修改主题scheme"><span class="nav-number">4.1.1.</span> <span class="nav-text">1.修改主题scheme</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-设置代码高亮"><span class="nav-number">4.1.2.</span> <span class="nav-text">2.设置代码高亮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-修改侧边栏链接"><span class="nav-number">4.1.3.</span> <span class="nav-text">3.修改侧边栏链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-设置头像和site的favicon"><span class="nav-number">4.1.4.</span> <span class="nav-text">4.设置头像和site的favicon</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的第三方插件定制的情况："><span class="nav-number">4.2.</span> <span class="nav-text">我的第三方插件定制的情况：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-统计阅读量"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.统计阅读量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-增加评论功能"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.增加评论功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-统计自己网站的流量情况"><span class="nav-number">4.2.3.</span> <span class="nav-text">3.统计自己网站的流量情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-增加搜索功能-即站内搜索"><span class="nav-number">4.2.4.</span> <span class="nav-text">4.增加搜索功能,即站内搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-内容分享功能"><span class="nav-number">4.2.5.</span> <span class="nav-text">5.内容分享功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-字数统计功能"><span class="nav-number">4.2.6.</span> <span class="nav-text">6.字数统计功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出现过的问题汇总："><span class="nav-number">4.3.</span> <span class="nav-text">出现过的问题汇总：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-启动的时候发起请求的时候报错ENOENT-no-such-file-or-directory"><span class="nav-number">4.3.1.</span> <span class="nav-text">1.启动的时候发起请求的时候报错ENOENT, no such file or directory </span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gt-原因："><span class="nav-number">4.3.1.1.</span> <span class="nav-text">==>原因：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-执行-“npm-install-hexo-generator-searchdb-–save“时，报如下的错误"><span class="nav-number">4.3.2.</span> <span class="nav-text">2.执行 “npm install hexo-generator-searchdb –save“时，报如下的错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-执行hexo操作时，报ERROR-Script-load-failed-exturl-js"><span class="nav-number">4.3.3.</span> <span class="nav-text">3.执行hexo操作时，报ERROR Script load failed(exturl.js)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-报错：ERROR-Plugin-load-failed-hexo-git-backup"><span class="nav-number">4.3.4.</span> <span class="nav-text">4.报错：ERROR Plugin load failed: hexo-git-backup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-报错：ERROR-Deployer-not-found-git"><span class="nav-number">4.3.5.</span> <span class="nav-text">5.报错：ERROR Deployer not found: git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-报错：Template-render-error-unknown-path"><span class="nav-number">4.3.6.</span> <span class="nav-text">6.报错：Template render error: (unknown path)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gt-原因：-1"><span class="nav-number">4.3.6.1.</span> <span class="nav-text">==>原因：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考网站"><span class="nav-number">5.</span> <span class="nav-text">参考网站</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jamefeng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RRpPl3beWKn2TycBqKs6y22c-gzGzoHsz", "AXO0Ql8DsD0jEmw8oQE3aSpP");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
