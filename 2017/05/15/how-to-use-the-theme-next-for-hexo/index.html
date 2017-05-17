@@ -72,7 +72,7 @@
 <meta property="og:site_name" content="留阵～风～">
 <meta property="og:description" content="之前使用的hexo的jacman,但是发现还是没hexo的nexT的简约，而且nexT本身就自配置了各种第三方插件，你需要开启和设置对应一些你的参数即可。所以果断选他。这篇博客主要是简单带过并且补充一些我走过坑和一些注意事项。欢迎搭建评论和谈论交流。">
 <meta property="og:image" content="http://jamfliu.github.io/images/pages/hexo_desciption.png">
-<meta property="og:updated_time" content="2017-05-17T06:46:22.000Z">
+<meta property="og:updated_time" content="2017-05-17T06:54:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【原创】如何使用hexo的NexT主题">
 <meta name="twitter:description" content="之前使用的hexo的jacman,但是发现还是没hexo的nexT的简约，而且nexT本身就自配置了各种第三方插件，你需要开启和设置对应一些你的参数即可。所以果断选他。这篇博客主要是简单带过并且补充一些我走过坑和一些注意事项。欢迎搭建评论和谈论交流。">
@@ -367,7 +367,7 @@
                 </span>
                 
                 <span title="字数统计">
-                  3,129
+                  3,127
                 </span>
               
 
@@ -450,8 +450,8 @@
 <h4 id="3-验证主题"><a href="#3-验证主题" class="headerlink" title="3.验证主题"></a>3.验证主题</h4><p>在hexo站点目录下，启动本地站点</p>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
 <p>可简写”<strong>hexo s</strong>“, 可以开启debug模式 “<strong>hexo server -debug</strong>“.</p>
-<p>此时即可使用浏览器访问 <a href="http://localhost:4000，检查站点是否正确运行。" target="_blank" rel="external">http://localhost:4000，检查站点是否正确运行。</a></p>
-<h3 id="3-3-使用"><a href="#3-3-使用" class="headerlink" title="3.3 使用"></a>3.3 使用</h3><p>（可参考[官方教程](<a href="https://hexo.io/zh-cn/docs/commands.html）" target="_blank" rel="external">https://hexo.io/zh-cn/docs/commands.html）</a></p>
+<p>此时即可使用浏览器访问 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> ，检查站点是否正确运行。</p>
+<h3 id="3-3-使用"><a href="#3-3-使用" class="headerlink" title="3.3 使用"></a>3.3 使用</h3><p>（可参考<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">官方教程</a> )</p>
 <h4 id="1-新建一篇文章"><a href="#1-新建一篇文章" class="headerlink" title="1.新建一篇文章"></a>1.新建一篇文章</h4><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">new</span> [layout] &lt;<span class="built_in">title</span>&gt;</div></pre></td></tr></table></figure>
 <p>　　新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。</p>
 <h4 id="2-发表草稿"><a href="#2-发表草稿" class="headerlink" title="2.发表草稿"></a>2.发表草稿</h4><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">hexo </span><span class="string">publish </span>[<span class="string">layout]</span> &lt;<span class="string">filename&gt;</span>     <span class="comment">#发表草稿</span></div><div class="line"><span class="string">hexo </span><span class="built_in">--draft</span>                         <span class="comment">#显示草稿的文章</span></div></pre></td></tr></table></figure>
@@ -459,7 +459,7 @@
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">generate</span></div></pre></td></tr></table></figure>
 <p>可简写 “<strong>hexo g</strong>“， 通过””<strong>hexo deploy -g</strong>“也是生成静态文件。<br>   “<strong>hexo generate -d</strong>“ 生成后立即部署。</p>
 <h4 id="4-启动服务器"><a href="#4-启动服务器" class="headerlink" title="4.启动服务器"></a>4.启动服务器</h4><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
-<p>　　启动服务器。可简写 “”<strong>hexo s</strong>“，默认情况下，访问网址为： <a href="http://localhost:4000/。" target="_blank" rel="external">http://localhost:4000/。</a><br>   选项<strong>-p, –port</strong>–重设端口，<br>   <strong>-s, –static</strong>–只使用静态文件<br>，<strong>-l, –log</strong>启动日记记录，使用覆盖记录格式</p>
+<p>　　启动服务器。可简写 “”<strong>hexo s</strong>“，默认情况下，访问网址为： <a href="http://localhost:4000/。" target="_blank" rel="external">http://localhost:4000/。</a><br>　　<br>| 选项            | 描述           |<br>| ————- |:————-:|<br>|-p, –port     | 设置服务的端口号 |<br>|-s, –static   | 只使用静态文件                  |<br>|-l, –log      |  启动日记记录，使用覆盖记录格式     |</p>
 <h4 id="5-部署网站"><a href="#5-部署网站" class="headerlink" title="5.部署网站"></a>5.部署网站</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">hexo deploy</span></div></pre></td></tr></table></figure>
 <p>　　部署网站到github上。选项<strong>-g, –generate</strong>部署之前预先生成静态文件</p>
 <h4 id="6-清除缓存文件-db-json-和已生成的静态文件-public-。"><a href="#6-清除缓存文件-db-json-和已生成的静态文件-public-。" class="headerlink" title="6.清除缓存文件 (db.json) 和已生成的静态文件 (public)。"></a>6.清除缓存文件 (db.json) 和已生成的静态文件 (public)。</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">hexo clean</span></div></pre></td></tr></table></figure>
