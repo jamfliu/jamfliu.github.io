@@ -72,7 +72,7 @@
 <meta property="og:site_name" content="留阵～风～">
 <meta property="og:description" content="之前使用的hexo的jacman,但是发现还是没hexo的nexT的简约，而且nexT本身就自配置了各种第三方插件，你需要开启和设置对应一些你的参数即可。所以果断选他。这篇博客主要是简单带过并且补充一些我走过坑和一些注意事项。欢迎搭建评论和谈论交流。">
 <meta property="og:image" content="http://jamfliu.github.io/images/pages/hexo_desciption.png">
-<meta property="og:updated_time" content="2017-05-17T06:31:42.000Z">
+<meta property="og:updated_time" content="2017-05-17T06:46:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【原创】如何使用hexo的NexT主题">
 <meta name="twitter:description" content="之前使用的hexo的jacman,但是发现还是没hexo的nexT的简约，而且nexT本身就自配置了各种第三方插件，你需要开启和设置对应一些你的参数即可。所以果断选他。这篇博客主要是简单带过并且补充一些我走过坑和一些注意事项。欢迎搭建评论和谈论交流。">
@@ -367,7 +367,7 @@
                 </span>
                 
                 <span title="字数统计">
-                  3,125
+                  3,129
                 </span>
               
 
@@ -403,21 +403,25 @@
       
 
       
-        <h2 id="一、名词解释"><a href="#一、名词解释" class="headerlink" title="一、名词解释"></a>一、名词解释</h2><p><a href="http://theme-next.iissnan.com" target="_blank" rel="external"><strong><em>NexT</em></strong></a>: 是hexo的一个主题，你可以换各种hexo主题，而保持原有内容不变。</p>
-<p><a href="https://hexo.io/zh-cn/" target="_blank" rel="external"><strong><em>Hexo</em></strong></a>: 是高效的静态站点生成框架，基于 Node.js。 通过 Hexo 你可以轻松地使用 Markdown 编写文章，除了 Markdown 本身的语法之外，还可以使用 Hexo 提供的 标签插件 来快速的插入特定形式的内容。</p>
-<p>　　特点：超快速度(渲染速度)，支持markdown,一键部署，丰富的插件</p>
-<p><a href="https://www.npmjs.com/" target="_blank" rel="external"><strong><em>npm</em></strong></a>: 是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题</p>
+        <h2 id="一、名词解释"><a href="#一、名词解释" class="headerlink" title="一、名词解释"></a>一、名词解释</h2><ul>
+<li><font style="color:blue"> <strong><em><a href="http://theme-next.iissnan.com" target="_blank" rel="external">NexT</a></em></strong></font>: 是hexo的一个主题，你可以换各种hexo主题，而保持原有内容不变。</li>
+<li><font style="color:blue"><strong><em><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a></em></strong></font>: 是高效的静态站点生成框架，基于 Node.js。 通过 Hexo 你可以轻松地使用 Markdown 编写文章，除了 Markdown 本身的语法之外，还可以使用 Hexo 提供的 标签插件 来快速的插入特定形式的内容。<br>特点：超快速度(渲染速度)，支持markdown,一键部署，丰富的插件</li>
+<li><p><font style="color:blue"><strong><em><a href="https://www.npmjs.com/" target="_blank" rel="external">npm</a></em></strong></font>: 是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题</p>
 <ol>
 <li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。  </li>
 <li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。 </li>
 <li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
 </ol>
-<p><font style="background-color:#2780e3;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
-    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">站点配置文件</font>:一份位于站点根目录下，主要包含 Hexo 本身的配置。位置：your-hexo-site/_config.yml</p>
-<p><font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
-    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>:位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。位置: your-hexo-site/themes/主题名/_config.yml。例如next的就是your-hexo-site/themes/next/_config.yml</p>
+</li>
+<li><p><font style="background-color:#2780e3;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+  text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">站点配置文件</font>:一份位于站点根目录下，主要包含 Hexo 本身的配置。位置：your-hexo-site/_config.yml</p>
+</li>
+<li><p><font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+  text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>:位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。位置: your-hexo-site/themes/主题名/_config.yml。例如next的就是your-hexo-site/themes/next/_config.yml</p>
+</li>
+</ul>
 <hr>
-<h2 id="二、Hexo安装指南"><a href="#二、Hexo安装指南" class="headerlink" title="二、Hexo安装指南"></a>二、Hexo安装指南</h2><h3 id="2-1-条件"><a href="#2-1-条件" class="headerlink" title="2.1 条件"></a>2.1 条件</h3><p>　　先安装好Git和Node.js<br>　　（详细的安装过程见<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">官方教程</a>）</p>
+<h2 id="二、Hexo安装指南"><a href="#二、Hexo安装指南" class="headerlink" title="二、Hexo安装指南"></a>二、Hexo安装指南</h2><h3 id="2-1-条件"><a href="#2-1-条件" class="headerlink" title="2.1 条件"></a>2.1 条件</h3><p>　　先安装好Git和Node.js （详细的安装过程见<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">官方教程</a>）</p>
 <h3 id="2-2-Hexo的安装"><a href="#2-2-Hexo的安装" class="headerlink" title="2.2 Hexo的安装"></a>2.2 Hexo的安装</h3><h4 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1.安装Hexo"></a>1.安装Hexo</h4><p>　　所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">＄npm install -g hexo-<span class="keyword">cli</span></div></pre></td></tr></table></figure>
 <h4 id="2-初始化Hexo"><a href="#2-初始化Hexo" class="headerlink" title="2.初始化Hexo"></a>2.初始化Hexo</h4><p>　　先转到自己自定的文件，作为Hexo的根目录（这时候可以省略<folder>的参数）</folder></p>
@@ -495,8 +499,7 @@
     text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>启动本地搜索</strong></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">local_search:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
 <p>【过程中遇到的问题】：查不了，发现是无生成search.xml<br> 也没有报错，似乎是node的版本不支持，我通过 npm upgrade和更新brew upgrade node[我的是mac os]来解决</p>
-<h4 id="5-内容分享功能"><a href="#5-内容分享功能" class="headerlink" title="5.内容分享功能"></a>5.内容分享功能</h4><p>　　百度分析在https好像有点问题，使用了JiaThis，但是好像也不稳定，暂时先开着。</p>
-<p>　　编辑 <font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+<h4 id="5-内容分享功能"><a href="#5-内容分享功能" class="headerlink" title="5.内容分享功能"></a>5.内容分享功能</h4><p>　　百度分享和JiaThis都不支持https，我已经关闭了，本地使用了JiaThis可以，如需要配置也很简单。<br>　　编辑 <font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
     text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>， 添加/修改字段 jiathis，值为 true。</p>
 <h4 id="6-字数统计功能"><a href="#6-字数统计功能" class="headerlink" title="6.字数统计功能"></a>6.字数统计功能</h4><p><strong> 1） 安装hexo-wordcount，在站点的根目录下执行以下命令</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-wordcount <span class="comment">--save</span></div></pre></td></tr></table></figure>
