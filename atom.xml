@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>留阵～风～</title>
+  <subtitle>人咬得菜根，则百事可做</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://jamfliu.github.io/"/>
+  <updated>2017-05-19T01:59:58.000Z</updated>
+  <id>http://jamfliu.github.io/</id>
+  
+  <author>
+    <name>jamefeng</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://jamfliu.github.io/2017/05/17/Git-Usage-001/"/>
+    <id>http://jamfliu.github.io/2017/05/17/Git-Usage-001/</id>
+    <published>2017-05-17T05:10:57.000Z</published>
+    <updated>2017-05-19T01:59:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>title: 【原创】git资料整理系列之一<br>date: 2017-05-16 18:58:35<br>tags:</p>
+<ul>
+<li>git</li>
+<li>git remote<br>categories: 随笔<br>description: 公司前段时间已经从svn中迁移到git，但是发现过程中会遇到很多的问题。所以打算把自己学习的整理一下，并且后续会更新遇到的一些问题以及解决。<br>—Git的常用操作：</li>
+</ul>
+<p>#<br>Git和svn的优势：</p>
+<p>1.创建空Git库 或者 重置（） </p>
+<p>  cd 到你选择的目录（cd 到改目录）后执行下面指令:     [初始化仓库— 执行成功，会生成.git目录。这个.git目录存储着管理当前目录内容所属的仓库数据]</p>
+<p>   git init</p>
+<p>2.查看当前未添加未提交的（1.工作区和stage的差异 2.stage和HEAD的差异－除此之外都是与HEAD的一样）</p>
+<p>  git status（差异可以用 git diff 文件）</p>
+<p>  git diff         //查看当前工作区与暂存区  的差别<br>  git diff –cached      //查看暂存区和本地仓库的差别</p>
+<p>  下面操作 如果不确定当前内容：可以在指令之后加-p 进入交互模式（会提示操作前后的差异）<br>   (新增文件不生效? git add <em> 生效)<br>3.添加 or 修改到库中（可用交互方式）  [提交前可参看 “查询记录 3）”查看代码的差异]<br> 1) git add <files>  / </files></em>              //添加到 暂存区(Stage或者Index)<br>     git add -i                             //Good,交互式选择性界面进行添加，<br>     git add -p                            //交互式查看内容差异选择<br> 2) git commit -m “描述”    //提交到仓库<br> git commit -am “描述”     //git add 和 git commit的结合。直接提交到仓库 【很危险】<br> 3) git commit –amend       //修改提交信息<br> 4) git rebase -i   HEAD~2    //压缩历史(把这次的提交和之前的提交 这两个历史记录  压缩成一个历史记录)，  常见： 例如发现已经提交的内容中有些拼写错误等，rebase将这个修改包含前一个提交之中，压缩成一个历史记录<br>    在编辑器中编辑<br>    pick  xxxx1  描述1<br>    pick  xxxx2  描述2 // 把这个改成  fixup xxxx2  描述2<br>4.删除文件（可用交互方式）<br>  1）rm <files>                  //本地删除<br>  2）git rm <files>             //从HEAD中（即已提交）删除，放在stage里（未提交）<br>       git rm –cached <files>             //从stage中（即已index）删除，放在workding里（工作空间）<br>  3）git commit -m ‘描述’  //提交到</files></files></files></p>
+<p>5.还原文件（可用交互方式）</p>
+<p> 1）撤销workspace级别的<br>git checkout  – <files>     //还原未add(即未index)的文件       —&gt;从stage还原到工作区 </files></p>
+<p>git checkout  – .     //还原未add(即未index)的所有文件        //很危险，本地修改的会无声息地被覆盖<br>git checkout branch  – <files>        //   /uncommit &amp; unstage &amp; unworkspace.本地仓库以及stage修改的会无声息地被覆盖</files></p>
+<p>#查看哪些文件和目录会被删除<br> git clean  -nd     //查看remove Untracked files  (即删除本地多余的文件和目录 ，未add新增的文件)<br> git clean  -fd     //remove Untracked files</p>
+<p>#如果要还原已经被删除的<br>git checkout HEAD~1 – <files> //从历史中恢复某文件</files></p>
+<p>2）撤销stage级别的<br> git reset HEAD <files>   //unstage(不会回退commit的), 还原已经add(即已经index)的到工作区  –&gt;从HEAD还原到stage<br>   git reset – <files>   //unstage(不会回退commit的), 还原已经add(即已经index)的到工作区  –&gt;从HEAD还原到stage<br>    git reset HEAD      //unstage所有的文件(不会回退commit的),还原所有已经add SS<br> 3) 撤销commit级别的<br>git reset <commit_id> //uncommit &amp; unstage  //commit_id –&gt;  HEAD^  or HEAD^^ or HEAD~100 or 版本号(前几位即可)<br> (git reset –mixed 是默认的，会回退commit和index信息)<br>  git reset –soft <commit_id>  //uncommit,不回退index信息<br>  git reset –hard <commit_id>  //uncommit &amp; unstage &amp; unworkspace,会回退commit、index和工作区(workspace)信息<br>                                //文件全部回退到当前版本，不可恢复。慎用！！！<br>(commid_id  1⃣️可通过 git log 取前几位即可查看HEAD版本之前－不一定最新 2⃣️git reflog查看历史操作记录)   </commit_id></commit_id></commit_id></files></files></p>
+<p> 4) 撤销操作级别的(通过git reflog)<br>   git reset –hard  <commit_id>  //会直接回退到这个版本,//文件全部回退到当前版本，git log不可恢复。慎用！！！但是可以通过 git reflog<br>   git reset  <commit_id>  //会回退这个reflog下一个操作到workspace<br>   git reset  <commit_id>  //会回退这个reflog下一个操作到index里</commit_id></commit_id></commit_id></p>
+<p>6.查询记录<br>  1）git log –  <files>          //查看提交的历史（HEAD之前的，之后的版本无展示）<br>       git log –pretty=oneline   //只显示提交信息的第一行<br>       git log -p  [<file>]     //文件的前后差别就会显示在提交后的信息<br>       git log  –graph    //可以用图表形式输出提交日志   –也可以看到 图表形式分支的提交<br>  2）git reflog – <files>   //查看历史操作记录。 查看当前仓库执行过的操作的日志<br>  (回退到某个版本之后，HEAD指向该版本，git log是查询HEAD之前的版本－－即新版的看不到。 使用git reflog 查看操作记录)<br>  3） git diff              //查看当前工作区与暂存区  的差别<br>    git diff HEAD       //查看工作区和最新提交（即本地仓库）的差别<br>    git diff –cached       //查看暂存区和本地仓库的差别<br>  4) 分支的查看 可以分支管理部分<br>       git branch -a       //查看所有版本<br>       git branch           //查看当前分支：git branch -r 或者 git branch<br>       git log  –graph    //可以用图表形式输出提交日志   –也可以看到 图表形式分支的提交</files></file></files></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;title: 【原创】git资料整理系列之一&lt;br&gt;date: 2017-05-16 18:58:35&lt;br&gt;tags:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;git&lt;/li&gt;
+&lt;li&gt;git remote&lt;br&gt;categories: 随笔&lt;br&gt;description: 公司前段时
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>【原创】如何使用hexo的NexT主题</title>
+    <link href="http://jamfliu.github.io/2017/05/15/how-to-use-the-theme-next-for-hexo/"/>
+    <id>http://jamfliu.github.io/2017/05/15/how-to-use-the-theme-next-for-hexo/</id>
+    <published>2017-05-15T05:57:41.000Z</published>
+    <updated>2017-05-19T02:53:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>之前使用的hexo的jacman,但是发现还是没hexo的nexT的简约，而且nexT本身就自配置了各种第三方插件，你需要开启和设置对应一些你的参数即可。<br>所以果断选他。这篇博客主要是简单带过并且补充一些我走过坑和一些注意事项。欢迎评论和交流。</p>
+</blockquote>
+<h2 id="一、名词解释"><a href="#一、名词解释" class="headerlink" title="一、名词解释"></a>一、名词解释</h2><ul>
+<li><font style="color:blue"> <strong><em><a href="http://theme-next.iissnan.com" target="_blank" rel="external">NexT</a></em></strong></font>: 是hexo的一个主题，你可以换各种hexo主题，而保持原有内容不变。</li>
+<li><font style="color:blue"><strong><em><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a></em></strong></font>: 是高效的静态站点生成框架，基于 Node.js。 通过 Hexo 你可以轻松地使用 Markdown 编写文章，除了 Markdown 本身的语法之外，还可以使用 Hexo 提供的 标签插件 来快速的插入特定形式的内容。<br>特点：超快速度(渲染速度)，支持markdown,一键部署，丰富的插件</li>
+<li><p><font style="color:blue"><strong><em><a href="https://www.npmjs.com/" target="_blank" rel="external">npm</a></em></strong></font>: 是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题</p>
+<ol>
+<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。  </li>
+<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。 </li>
+<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
+</ol>
+</li>
+<li><p><font style="background-color:#2780e3;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+  text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">站点配置文件</font>:一份位于站点根目录下，主要包含 Hexo 本身的配置。位置：your-hexo-site/_config.yml</p>
+</li>
+<li><p><font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+  text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>:位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。位置: your-hexo-site/themes/主题名/_config.yml。例如next的就是your-hexo-site/themes/next/_config.yml</p>
+</li>
+</ul>
+<hr>
+<h2 id="二、Hexo安装指南"><a href="#二、Hexo安装指南" class="headerlink" title="二、Hexo安装指南"></a>二、Hexo安装指南</h2><h3 id="2-1-条件"><a href="#2-1-条件" class="headerlink" title="2.1 条件"></a>2.1 条件</h3><p>　　先安装好Git和Node.js （详细的安装过程见<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">官方教程</a>）</p>
+<h3 id="2-2-Hexo的安装"><a href="#2-2-Hexo的安装" class="headerlink" title="2.2 Hexo的安装"></a>2.2 Hexo的安装</h3><h4 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1.安装Hexo"></a>1.安装Hexo</h4><p>　　所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">＄npm install -g hexo-<span class="keyword">cli</span></div></pre></td></tr></table></figure>
+<h4 id="2-初始化Hexo"><a href="#2-初始化Hexo" class="headerlink" title="2.初始化Hexo"></a>2.初始化Hexo</h4><p>　　先转到自己自定的文件，作为Hexo的根目录（这时候可以省略<folder>的参数）</folder></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> hexo init &lt;folder&gt;</span></div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &lt;folder&gt;</span></div><div class="line"><span class="meta">$</span><span class="bash"> npm install</span></div></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-3-Hexo主题安装"><a href="#2-3-Hexo主题安装" class="headerlink" title="2.3 Hexo主题安装"></a>2.3 Hexo主题安装</h3><p>　　Hexo 安装主题的方式非常简单，只需要将主题文件拷贝至站点目录的 themes 目录下， 然后修改下配置文件即可。</p>
+<h3 id="2-4-Hexo目录简介"><a href="#2-4-Hexo目录简介" class="headerlink" title="2.4 Hexo目录简介"></a>2.4 Hexo目录简介</h3><p>详细看图片：</p>
+<p><img src="/images/pages/hexo_desciption.png" alt="image"></p>
+<h2 id="三、NexT主题安装指南"><a href="#三、NexT主题安装指南" class="headerlink" title="三、NexT主题安装指南"></a>三、NexT主题安装指南</h2><h3 id="3-1-条件"><a href="#3-1-条件" class="headerlink" title="3.1 条件"></a>3.1 条件</h3><p>　　先安装好Git和hexo<br>　　（详细的安装过程可参考<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">官方教程</a>）（本人的是mac os x，直接brew install指令即可）</p>
+<h3 id="3-2-主题安装步骤"><a href="#3-2-主题安装步骤" class="headerlink" title="3.2 主题安装步骤"></a>3.2 主题安装步骤</h3><h4 id="1-下载主题"><a href="#1-下载主题" class="headerlink" title="1.下载主题"></a>1.下载主题</h4><p>【方式一:Git的方式】<br>　在终端窗口下，定位到 Hexo 站点目录下。使用 Git checkout 代码：　　<br>　<br>（推荐此方式，之后的更新可以通过 git pull 来快速更新， 而不用再次下载压缩包替换。）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> your-hexo-site</span></div><div class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span></div></pre></td></tr></table></figure>
+<p>【方式二:下载稳定版本】</p>
+<ol>
+<li><p>前往 NexT 版本 <a href="https://github.com/iissnan/hexo-theme-next/releases" target="_blank" rel="external">发布页面</a>。</p>
+</li>
+<li><p>选择你所需要的版本，下载 Download 区域下的 Source Code (zip) 到本地。例如，下载 v5.1.1 版本</p>
+</li>
+<li><p>解压所下载的压缩包至站点的 themes 目录下， 并将 解压后的文件夹名称（hexo-theme-next-5.1.1）更改为 next</p>
+</li>
+</ol>
+<h4 id="2-站点配置主题"><a href="#2-站点配置主题" class="headerlink" title="2.站点配置主题"></a>2.站点配置主题</h4><p>打开<font style="background-color:#2780e3;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">站点配置文件</font>找到 theme 字段，并将其值更改为 next。</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">theme: <span class="keyword">next</span></div></pre></td></tr></table></figure>
+<p>到此，NexT 主题安装完成。下一步我们将验证主题是否正确启用。在切换主题之后、验证之前， 我们最好使用 hexo clean 来清除 Hexo 的缓存。</p>
+<p><strong>注意事项</strong>：yml每项配置冒号:后面需要加空格的</p>
+<h4 id="3-验证主题"><a href="#3-验证主题" class="headerlink" title="3.验证主题"></a>3.验证主题</h4><p>在hexo站点目录下，启动本地站点</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
+<p>可简写”<strong>hexo s</strong>“, 可以开启debug模式 “<strong>hexo server -debug</strong>“.</p>
+<p>此时即可使用浏览器访问 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> ，检查站点是否正确运行。</p>
+<h3 id="3-3-使用"><a href="#3-3-使用" class="headerlink" title="3.3 使用"></a>3.3 使用</h3><p>（可参考<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">官方教程</a> )</p>
+<h4 id="1-新建一篇文章"><a href="#1-新建一篇文章" class="headerlink" title="1.新建一篇文章"></a>1.新建一篇文章</h4><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">new</span> [layout] &lt;<span class="built_in">title</span>&gt;</div></pre></td></tr></table></figure>
+<p>　　新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。</p>
+<h4 id="2-发表草稿"><a href="#2-发表草稿" class="headerlink" title="2.发表草稿"></a>2.发表草稿</h4><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">hexo </span><span class="string">publish </span>[<span class="string">layout]</span> &lt;<span class="string">filename&gt;</span>     <span class="comment">#发表草稿</span></div><div class="line"><span class="string">hexo </span><span class="built_in">--draft</span>                         <span class="comment">#显示草稿的文章</span></div></pre></td></tr></table></figure>
+<h4 id="3-生成静态文件"><a href="#3-生成静态文件" class="headerlink" title="3.生成静态文件"></a>3.生成静态文件</h4><p>　　把markdown、主题等生成静态文件</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">generate</span></div></pre></td></tr></table></figure>
+<p>可简写 “<strong>hexo g</strong>“， 通过””<strong>hexo deploy -g</strong>“也是生成静态文件。<br>   “<strong>hexo generate -d</strong>“ 生成后立即部署。</p>
+<h4 id="4-启动服务器"><a href="#4-启动服务器" class="headerlink" title="4.启动服务器"></a>4.启动服务器</h4><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
+<p>　　启动服务器。可简写 “”<strong>hexo s</strong>“，默认情况下，访问网址为： <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 。</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-p, –port</td>
+<td>设置服务的端口号</td>
+</tr>
+<tr>
+<td>-s, –static</td>
+<td>只使用静态文件</td>
+</tr>
+<tr>
+<td>-l, –log</td>
+<td>启动日记记录,使用覆盖记录格式</td>
+</tr>
+</tbody>
+</table>
+<h4 id="5-部署网站"><a href="#5-部署网站" class="headerlink" title="5.部署网站"></a>5.部署网站</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">hexo deploy</span></div></pre></td></tr></table></figure>
+<p>　　部署网站到github上。选项<strong>-g, –generate</strong>部署之前预先生成静态文件</p>
+<h4 id="6-清除缓存文件-db-json-和已生成的静态文件-public-。"><a href="#6-清除缓存文件-db-json-和已生成的静态文件-public-。" class="headerlink" title="6.清除缓存文件 (db.json) 和已生成的静态文件 (public)。"></a>6.清除缓存文件 (db.json) 和已生成的静态文件 (public)。</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">hexo clean</span></div></pre></td></tr></table></figure>
+<p>清除缓存文件 (db.json) 和已生成的静态文件 (public)。<br>在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</p>
+<h4 id="7-列出网站资料"><a href="#7-列出网站资料" class="headerlink" title="7.列出网站资料"></a>7.列出网站资料</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="built_in">list</span> &lt;type&gt;</div></pre></td></tr></table></figure>
+<h2 id="四、NexT主题定制化以及第三方配置指南"><a href="#四、NexT主题定制化以及第三方配置指南" class="headerlink" title="四、NexT主题定制化以及第三方配置指南"></a>四、NexT主题定制化以及第三方配置指南</h2><h3 id="4-1-我的主题定制的情况："><a href="#4-1-我的主题定制的情况：" class="headerlink" title="4.1 我的主题定制的情况："></a>4.1 我的主题定制的情况：</h3><p>　　修改<font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>的。本身NexT主题里面有配置很多的第三方插件配置，所以只需要打开和对应配置你的一些App_ID即可。</p>
+<h4 id="1-修改主题scheme"><a href="#1-修改主题scheme" class="headerlink" title="1.修改主题scheme"></a>1.修改主题scheme</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">scheme:</span> Pisce</div></pre></td></tr></table></figure>
+<h4 id="2-设置代码高亮"><a href="#2-设置代码高亮" class="headerlink" title="2.设置代码高亮"></a>2.设置代码高亮</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">highlight_theme:</span> night bright</div></pre></td></tr></table></figure>
+<h4 id="3-修改侧边栏链接"><a href="#3-修改侧边栏链接" class="headerlink" title="3.修改侧边栏链接"></a>3.修改侧边栏链接</h4><p>链接放置在 social 字段下，一行一个链接。其键值格式是 显示文本: 链接地址</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">social</span>:</div><div class="line">  #<span class="attribute">LinkLabel</span>: Link</div><div class="line">  <span class="attribute">GitHub</span>: <span class="attribute">https</span>:<span class="comment">//github.com/jamfliu</span></div><div class="line">  微博: <span class="attribute">http</span>:<span class="comment">//weibo.com/jamfliu</span></div><div class="line">  豆瓣: <span class="attribute">http</span>:<span class="comment">//douban.com/people/jamfliu</span></div><div class="line">  知乎: <span class="attribute">http</span>:<span class="comment">//www.zhihu.com/people/jamfliu</span></div></pre></td></tr></table></figure>
+<h4 id="4-设置头像和site的favicon"><a href="#4-设置头像和site的favicon" class="headerlink" title="4.设置头像和site的favicon"></a>4.设置头像和site的favicon</h4><p>  修改字段 avatar， 值设置成头像的链接地址。其中，头像的链接地址可以是：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">avatar:</span> images/lzf.png</div></pre></td></tr></table></figure>
+<p>下面是设置favicon。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">favicon:</span> images/lzffavicon.ico</div></pre></td></tr></table></figure>
+<h3 id="4-2-我的第三方插件定制的情况："><a href="#4-2-我的第三方插件定制的情况：" class="headerlink" title="4.2 我的第三方插件定制的情况："></a>4.2 我的第三方插件定制的情况：</h3><h4 id="1-统计阅读量"><a href="#1-统计阅读量" class="headerlink" title="1.统计阅读量"></a>1.统计阅读量</h4><p>　　原本我是申请了leancloud的appId和appKey，后面发现不蒜子统计中也包含了阅读量，所以我就配置但没用。</p>
+<p> <strong>方式一</strong>：使用leancloud<br>  首先申请它的AppID以及AppKey，在next的主题配置文件中找到leancloud，然后配置，主要是配置<strong>enable: true</strong>,然后填入你的AppID以及AppKey</p>
+<p> <strong>方式二</strong>：使用不蒜子统计中的page_pv项<br>    直接使用<strong>enable: true</strong>即可</p>
+<h4 id="2-增加评论功能"><a href="#2-增加评论功能" class="headerlink" title="2.增加评论功能"></a>2.增加评论功能</h4><p> 之前使用的多说已经要停了，所以改用了DISQUS，但是发现在国内的网络加载它的js老超时，果断换了一个，本想还网易云跟帖的，但是注册老有问题，而且支持的社交少。选了韩国的来必力，还算挺好用的，注册都不麻烦，就是获取验证码的时候是韩文有点恶心，不是全程中文的。</p>
+<p>   申请<a href="https://livere.com/" target="_blank" rel="external">来必力</a>的你自己的安装代码，注册完取data-uid里面的代码。然后设置livere_uid</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">livere_uid:</span> MTAyMC8y11222Y3NS800000</div></pre></td></tr></table></figure>
+<h4 id="3-统计自己网站的流量情况"><a href="#3-统计自己网站的流量情况" class="headerlink" title="3.统计自己网站的流量情况"></a>3.统计自己网站的流量情况</h4><p><strong>  1) 不蒜子统计 </strong></p>
+<p>这个不需要去注册，打开即可可以统计本站点的总的pv和uv量，也可以统计单个页面的pv量。</p>
+<p>编辑<font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>中的busuanzi_count的配置项。<br> 当”<strong>enable: true</strong>“时，代表开启全局开关。若site_uv、site_pv、page_pv的值均为false时，不蒜子仅作记录而不会在页面上显示。</p>
+<p><strong>  2) 百度统计 </strong></p>
+<p>为了后续方便分析，增加了百度统计，使用了百度统计，并不会给网站速度带慢的情况。</p>
+<p>申请你的自己的错误码，然后设置”<strong>baidu_analytics</strong>“为你自己的脚本ID即可</p>
+<h4 id="4-增加搜索功能-即站内搜索"><a href="#4-增加搜索功能-即站内搜索" class="headerlink" title="4.增加搜索功能,即站内搜索"></a>4.增加搜索功能,即站内搜索</h4><p> NexT主题支持集成 Swiftype、 微搜索、Local Search 和 Algolia,Swiftype和Algolia都只有一段时间的试用期，可以采用Hexo提供的Local Search,原理是通过hexo-generator-search插件在本地生成一个search.xml文件，搜索的时候从这个文件中根据关键字检索出相应的链接。</p>
+<p><strong> 1） 安装 hexo-generator-searchdb，在站点的根目录下执行以下命令</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-generator-searchdb <span class="comment">--save</span></div><div class="line">npm <span class="keyword">install</span> hexo-generator-<span class="keyword">search</span> <span class="comment">--save</span></div></pre></td></tr></table></figure>
+<p>现在官方文档漏了下面一条语句，会导致生成不了search.xml</p>
+<p><strong> 2） 在<font style="background-color:#2780e3;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">站点配置文件</font>末尾中新增下面的配置项</strong></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">search:</span></div><div class="line"><span class="symbol">  path:</span> search.xml</div><div class="line"><span class="symbol">  field:</span> post</div><div class="line"><span class="symbol">  format:</span> html</div><div class="line"><span class="symbol">  limit:</span> <span class="number">10000</span></div></pre></td></tr></table></figure>
+<p><strong> 3） 在<font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>启动本地搜索</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">local_search:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>【过程中遇到的问题】：查不了，发现是无生成search.xml<br> 也没有报错，似乎是node的版本不支持，我通过 npm upgrade和更新brew upgrade node[我的是mac os]来解决</p>
+<h4 id="5-内容分享功能"><a href="#5-内容分享功能" class="headerlink" title="5.内容分享功能"></a>5.内容分享功能</h4><p>　　百度分享和JiaThis都不支持https，我已经关闭了，本地使用了JiaThis可以，如需要配置也很简单。<br>　　编辑 <font style="background-color:#9954bb;display: inline;padding: .2em .6em .3em;font-size: 85%;font-weight: 700;line-height: 1;color: #fff;
+    text-align: center; white-space: nowrap;vertical-align: baseline;border-radius: .25em;">主题配置文件</font>， 添加/修改字段 jiathis，值为 true。</p>
+<h4 id="6-字数统计功能"><a href="#6-字数统计功能" class="headerlink" title="6.字数统计功能"></a>6.字数统计功能</h4><p><strong> 1） 安装hexo-wordcount，在站点的根目录下执行以下命令</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-wordcount <span class="comment">--save</span></div></pre></td></tr></table></figure>
+<p> <strong>2）修改配置文件</strong></p>
+<p> 方式一：采用默认配置的方式：</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">post_wordcount:</span></div><div class="line"><span class="attr"> item_text:</span> <span class="literal">false</span></div><div class="line"><span class="attr"> wordcount:</span> <span class="literal">true</span></div><div class="line"><span class="attr"> min2read:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p> 方式二：自定义的方式</p>
+<p>  ①为了方便地开启和关闭字数统计功能，我们需要在配置文件（站点配置文件或主题配置文件均可）中添加一个键值对：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 开启字数统计</span></div><div class="line"><span class="attr">word_count:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p> ②修改主题的swig布局，themes/next/layout/_macro/post.swig**</p>
+<p>  (看了这个swig，似乎默认支持的，虽然字段和结构不一样，但是我怎么配都不成功，所以新增了)</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> theme.word_count %&#125;</span><span class="xml"></span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"post-letters-count"</span>&gt;</span></div><div class="line">    &amp;nbsp; | &amp;nbsp;</div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="template-variable">&#123;&#123; wordcount(post.content) &#125;&#125;</span><span class="xml"> 字<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></div><div class="line">  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span><span class="xml"></span></div></pre></td></tr></table></figure>
+<h3 id="4-3-出现过的问题汇总："><a href="#4-3-出现过的问题汇总：" class="headerlink" title="4.3 出现过的问题汇总："></a>4.3 出现过的问题汇总：</h3><p>出现解决较久的问题有：</p>
+<h4 id="1-启动的时候发起请求的时候报错ENOENT-no-such-file-or-directory"><a href="#1-启动的时候发起请求的时候报错ENOENT-no-such-file-or-directory" class="headerlink" title="1.启动的时候发起请求的时候报错ENOENT, no such file or directory "></a><strong>1.启动的时候发起请求的时候报错ENOENT, no such file or directory </strong></h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">INFO  Hexo is running at http:<span class="comment">//0.0.0.0:4000/. Press Ctrl+C to stop.</span></div><div class="line">Unhandled rejection Error: ENOENT, no such file or directory <span class="string">'/Users/liuzhenfeng/git/blog_hexo/themes/next/layout/_scripts/schemes/.swig'</span></div><div class="line">    at Error (native)</div><div class="line">    at Object<span class="selector-class">.fs</span><span class="selector-class">.openSync</span> (fs<span class="selector-class">.js</span>:<span class="number">500</span>:<span class="number">18</span>)</div><div class="line">    at Object<span class="selector-class">.fs</span><span class="selector-class">.readFileSync</span> (fs<span class="selector-class">.js</span>:<span class="number">352</span>:<span class="number">15</span>)</div><div class="line">    at Object<span class="selector-class">.ret</span><span class="selector-class">.load</span> (/Users/liuzhenfeng/git/blog_hexo/node_modules/hexo/node_modules/swig/lib/loaders/filesystem<span class="selector-class">.js</span>:<span class="number">55</span>:<span class="number">15</span>)</div><div class="line">    ....</div><div class="line">    at process._tickCallback (node<span class="selector-class">.js</span>:<span class="number">355</span>:<span class="number">11</span>)</div></pre></td></tr></table></figure>
+<h5 id="gt-原因："><a href="#gt-原因：" class="headerlink" title="==&gt;原因："></a><strong>==&gt;原因：</strong></h5><p>  配置项的冒号后面无空格，比如错误的配置：（后面少了一个空格）</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">AppID:</span>XXX</div></pre></td></tr></table></figure>
+<p>正确的配置是冒号后面加空格，如下：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">AppID:</span> XXX</div></pre></td></tr></table></figure>
+<h4 id="2-执行-“npm-install-hexo-generator-searchdb-–save“时，报如下的错误"><a href="#2-执行-“npm-install-hexo-generator-searchdb-–save“时，报如下的错误" class="headerlink" title="2.执行 “npm install hexo-generator-searchdb –save“时，报如下的错误"></a>2.执行 “<strong>npm install hexo-generator-searchdb –save</strong>“时，报如下的错误</h4><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm WARN engine hexo-generator-searchdb<span class="symbol">@1</span><span class="number">.0</span><span class="number">.7</span>: wanted: &#123;<span class="string">"node"</span>:<span class="string">"&gt;= 4.2.2"</span>&#125; (current: &#123;<span class="string">"node"</span>:<span class="string">"0.12.7"</span>,<span class="string">"npm"</span>:<span class="string">"2.11.3"</span>&#125;)</div><div class="line">hexo-generator-searchdb<span class="symbol">@1</span><span class="number">.0</span><span class="number">.7</span> node_modules/hexo-generator-searchdb</div><div class="line">├── utils-merge<span class="symbol">@1</span><span class="number">.0</span><span class="number">.0</span></div><div class="line">├── striptags<span class="symbol">@3</span><span class="number">.0</span><span class="number">.1</span></div><div class="line">└── ejs<span class="symbol">@1</span><span class="number">.0</span><span class="number">.0</span></div></pre></td></tr></table></figure>
+<p>我通过 npm upgrade和更新brew upgrade node[我的是mac os]来解决，发现都是失败了，后来确定node是指nodejs就找了nodejs的更新方式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">第一步：首先安装n模块：</span></div><div class="line">npm install -g n</div><div class="line"><span class="meta">#</span><span class="bash">第二步：升级node.js到最新稳定版</span></div><div class="line">n stable</div></pre></td></tr></table></figure>
+<p>网上说这种解决办法有问题，所以要卸载干净之后重装</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">brew uninstall node  <span class="comment">#卸载，但是重新安装是会提示卸载不干净，需要额外删除一些</span></div><div class="line"><span class="comment">#以下是额外删除，主要根据错误提示</span></div><div class="line">rm -f /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">dtrace</span>/<span class="title">node</span>.<span class="title">d</span></span></div><div class="line">rm -f /usr/local/share/systemtap/tapset/node.stp</div><div class="line">rm /usr/local/share/man/man1/node.<span class="number">1</span></div><div class="line">rm -rf /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span></span></div></pre></td></tr></table></figure>
+<h4 id="3-执行hexo操作时，报ERROR-Script-load-failed-exturl-js"><a href="#3-执行hexo操作时，报ERROR-Script-load-failed-exturl-js" class="headerlink" title="3.执行hexo操作时，报ERROR Script load failed(exturl.js)"></a>3.执行hexo操作时，报ERROR Script load failed(exturl.js)</h4><p>情况：执行hexo操作时，报ERROR Script load failed: themes/next/scripts/tags/exturl.js<br>解决办法：重新安装hexo-util模块<br><figure class="highlight q"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -- <span class="built_in">save</span>-<span class="built_in">dev</span> hexo-util</div></pre></td></tr></table></figure></p>
+<h4 id="4-报错：ERROR-Plugin-load-failed-hexo-git-backup"><a href="#4-报错：ERROR-Plugin-load-failed-hexo-git-backup" class="headerlink" title="4.报错：ERROR Plugin load failed: hexo-git-backup"></a>4.报错：ERROR Plugin load failed: hexo-git-backup</h4><p>解决办法：重新安装hexo-git-backup模块<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm <span class="keyword">install</span> hexo-git-<span class="keyword">backup</span> <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<h4 id="5-报错：ERROR-Deployer-not-found-git"><a href="#5-报错：ERROR-Deployer-not-found-git" class="headerlink" title="5.报错：ERROR Deployer not found: git"></a>5.报错：ERROR Deployer not found: git</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> npm install hexo-deployer-git --save</span></div></pre></td></tr></table></figure>
+<h4 id="6-报错：Template-render-error-unknown-path"><a href="#6-报错：Template-render-error-unknown-path" class="headerlink" title="6.报错：Template render error: (unknown path)"></a>6.报错：Template render error: (unknown path)</h4><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">FATAL Something's wrong. Maybe you can find the solution here: http:<span class="comment">//hexo.io/docs/troubleshooting.html</span></div><div class="line">Template render <span class="built_in">error</span>: (unknown path) [<span class="keyword">Line</span> <span class="number">55</span>, Column <span class="number">232</span>]</div><div class="line">  unknown block tag: <span class="keyword">endif</span></div><div class="line">    at Object.exports.prettifyError (/Users/liuzhenfeng/git/blog_hexo/node_modules/nunjucks/src/<span class="keyword">lib</span>.js:<span class="number">34</span>:<span class="number">15</span>)</div></pre></td></tr></table></figure>
+<p>报这个错误的时候，比较容易确定是我心中md文件出问题了，但是具体是什么错误，一头雾水，严重影响到我的进度，m这个错误所指向的js我是没接触过的。最终我用了打印md文件前多少行，来确定第几行出错了。</p>
+<h5 id="gt-原因：-1"><a href="#gt-原因：-1" class="headerlink" title="==&gt;原因："></a><strong>==&gt;原因：</strong></h5><p>在字数统计功能的说明修改swig文件的的代码不小心动了一个字符，把那个统计文章字数的那段代码的”{“ –&gt; “&gt;”导致的报错 。改回去即可修复。</p>
+<p><br></p>
+<p><em>PS:有任何关于的问题，欢迎来评论讨论交流。</em></p>
+<h2 id="五、参考网站"><a href="#五、参考网站" class="headerlink" title="五、参考网站"></a>五、参考网站</h2><ol>
+<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo的官方文档</a></li>
+<li><a href="http://theme-next.iissnan.com" target="_blank" rel="external">NexT的官方文档</a></li>
+<li><a href="https://eason-yang.com/2016/11/05/add-word-count-to-hexo-next/" target="_blank" rel="external">为Hexo NexT主题添加字数统计功能</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      对Hexo的安装简单介绍，并且详细介绍我安装Next主题安装以及遇到的问题
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://jamfliu.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="hexo" scheme="http://jamfliu.github.io/tags/hexo/"/>
+    
+      <category term="next" scheme="http://jamfliu.github.io/tags/next/"/>
+    
+      <category term="how" scheme="http://jamfliu.github.io/tags/how/"/>
+    
+      <category term="第三方插件" scheme="http://jamfliu.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>［转］如何使用 Jacman 主题</title>
+    <link href="http://jamfliu.github.io/2015/07/29/how-to-use-jacman/"/>
+    <id>http://jamfliu.github.io/2015/07/29/how-to-use-jacman/</id>
+    <published>2015-07-29T01:58:17.000Z</published>
+    <updated>2017-05-19T03:34:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="主题介绍"><a href="#主题介绍" class="headerlink" title="主题介绍"></a>主题介绍</h2><p><a href="https://github.com/wuchong/jacman" target="_blank" rel="external">Jacman</a> 是一款扁平化，有着响应式设计的 <a href="http://http://hexo.io/" target="_blank" rel="external">Hexo</a> 主题。本站正式使用了 Jacman 主题。Jacman 基于 <a href="https://github.com/A-limon/pacman" target="_blank" rel="external">Pacman</a> 主题修改而来，目前已有很多特性与原主题不同。你可以前往 <a href="http://wuchong.me" target="_blank" rel="external">本站</a> 和 <a href="http://wuchong.me/jacman" target="_blank" rel="external">Demo</a> 预览更多关于本主题的更多效果。如果你有任何问题或意见欢迎到 GitHub 发表 <a href="https://github.com/wuchong/jacman/issues" target="_blank" rel="external">issue</a>。</p>
+<p>距离当初我把 Jacman 开源至今已有半年零一周了，在这半年里也一直保持着对 Jacman 的更新。看到很多人用这款主题，fork&amp;star 数也越来越好看，我也更有动力继续完善 Jacman。Jacman 自然还有很多改进空间，首先是文档问题，有许多人通过博客、微博、QQ 询问我有关主题的问题，我也意识到之前写的帮助手册可读性太差。正好趁着这次 Jacman 大更新，写篇更详尽、readable 的手册。</p>
+<h2 id="安装指南"><a href="#安装指南" class="headerlink" title="安装指南"></a>安装指南</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在博客根目录下执行如下命令。<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="keyword">clone</span> <span class="title">https</span>://github.com/wuchong/jacman.git themes/jacman</div></pre></td></tr></table></figure></p>
+<p>Jacman 需要安装 Hexo 2.7 及以上版本，请先升级您的 Hexo 程序，再启用此主题。</p>
+<h3 id="启用"><a href="#启用" class="headerlink" title="启用"></a>启用</h3><p>修改你的博客根目录下的<code>_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。同时建议设置<code>stylus</code>属性中的<code>compress</code>值为true，会自动压缩 CSS 文件，hexo默认配置中不包含这一项，建议开启。如下。<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">theme:</span> <span class="string">jacman</span></div><div class="line"><span class="attr">stylus:</span></div><div class="line"><span class="attr">  compress:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> themes/jacman</div><div class="line">git pull origin master</div></pre></td></tr></table></figure>
+<p>请先备份您主题目录下的 <code>_config.yml</code> 文件后再升级。</p>
+<a id="more"></a>
+<h2 id="配置指南"><a href="#配置指南" class="headerlink" title="配置指南"></a>配置指南</h2><p>Jacman 主题提供了丰富的配置属性，可以实现您对主题的自定义。配置文件<code>_config.yml</code>位于主题根目录下。本次更新对配置文件进行了较大调整，如您之前就使用了 Jacman，也需要您根据以下指南进行相应的修改。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line"><span class="comment">##### 菜单</span></div><div class="line"><span class="attr">menu:</span></div><div class="line">  <span class="string">主页:</span> <span class="string">/</span></div><div class="line">  <span class="string">归档:</span> <span class="string">/archives</span></div><div class="line">  <span class="string">关于:</span> <span class="string">/about</span></div><div class="line"></div><div class="line"><span class="comment">#### 控件</span></div><div class="line"><span class="attr">widgets:</span> </div><div class="line"><span class="bullet">-</span> <span class="string">category</span></div><div class="line"><span class="bullet">-</span> <span class="string">tag</span></div><div class="line"><span class="bullet">-</span> <span class="string">links</span></div><div class="line"><span class="bullet">-</span> <span class="string">rss</span></div><div class="line"></div><div class="line"><span class="comment">#### RSS </span></div><div class="line"><span class="attr">rss:</span> <span class="string">/atom.xml</span> </div><div class="line"></div><div class="line"><span class="comment">#### 图片相关</span></div><div class="line"><span class="attr">imglogo:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span>               <span class="comment">## 是否显示网站 logo</span></div><div class="line"><span class="attr">  src:</span> <span class="string">img/logo.png</span>        </div><div class="line"><span class="attr">favicon:</span> <span class="string">img/favicon.ico</span>     <span class="comment">## 网站图标    </span></div><div class="line"><span class="attr">apple_icon:</span> <span class="string">img/jacman.jpg</span>   <span class="comment">## 苹果设备上的图标，背景不要透明</span></div><div class="line"><span class="attr">author_img:</span> <span class="string">img/author.jpg</span>   <span class="comment">## 网站底部的博主头像</span></div><div class="line"><span class="attr">banner_img:</span> <span class="string">img/banner.jpg</span>   <span class="comment">## 博客顶部的图片</span></div><div class="line"></div><div class="line"><span class="comment">### 主题颜色</span></div><div class="line"><span class="attr">theme_color:</span></div><div class="line"><span class="attr">    theme:</span> <span class="string">'#2ca6cb'</span>    <span class="comment">##默认主题颜色为蓝色</span></div><div class="line"></div><div class="line"><span class="attr">close_aside:</span> <span class="literal">false</span>      <span class="comment">##是否在文章页面自动关闭侧边栏</span></div><div class="line"></div><div class="line"><span class="comment">#### 首页相关</span></div><div class="line"><span class="attr">index:</span></div><div class="line"><span class="attr">  expand:</span> <span class="literal">true</span>              <span class="comment">## 首页文章是否展开。默认为展开式，显示 Read More。</span></div><div class="line"><span class="attr">  excerpt_link:</span> <span class="string">Read</span> <span class="string">More</span>    </div><div class="line"></div><div class="line"><span class="comment">#### 作者信息</span></div><div class="line"><span class="attr">author:</span></div><div class="line"><span class="attr">  intro_line1:</span>  <span class="string">"Hello ,I'm Larry Page in Google."</span>    <span class="comment">## 网站底部的个人介绍</span></div><div class="line"><span class="attr">  intro_line2:</span>  <span class="string">"This is my blog,believe it or not."</span>  </div><div class="line"><span class="attr">  weibo_verifier:</span>  <span class="comment">## 微博秀的验证码</span></div><div class="line"><span class="attr">  tsina:</span>           <span class="comment">## 用于微博秀和微博分享</span></div><div class="line"><span class="attr">  weibo:</span>           <span class="comment">## 用于显示网站底部社交按钮，下同</span></div><div class="line"><span class="attr">  douban:</span>         </div><div class="line"><span class="attr">  zhihu:</span>  </div><div class="line"><span class="attr">  email:</span>     </div><div class="line"><span class="attr">  twitter:</span>   </div><div class="line"><span class="attr">  github:</span>     </div><div class="line"><span class="attr">  facebook:</span> </div><div class="line"><span class="attr">  linkedin:</span>   </div><div class="line"><span class="attr">  google_plus:</span>   </div><div class="line"><span class="attr">  stackoverflow:</span>  </div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#### 目录</span></div><div class="line"><span class="attr">toc:</span></div><div class="line"><span class="attr">  article:</span> <span class="literal">true</span>   <span class="comment">## 是否在文章中显示目录</span></div><div class="line"><span class="attr">  aside:</span> <span class="literal">true</span>     <span class="comment">## 是否在侧边栏显示目录</span></div><div class="line"></div><div class="line"><span class="comment">#### 友情链接</span></div><div class="line"><span class="attr">links:</span></div><div class="line">  <span class="string">码农圈:</span> <span class="attr">https://coderq.com,一个面向程序员交流分享的新一代社区</span></div><div class="line">  <span class="string">Jark's</span> <span class="attr">Blog:</span> <span class="attr">http://wuchong.me</span></div><div class="line">  </div><div class="line"><span class="comment">#### 评论</span></div><div class="line"><span class="attr">duoshuo_shortname:</span> </div><div class="line"><span class="attr">disqus_shortname:</span>  </div><div class="line"></div><div class="line"><span class="comment">#### 分享按钮</span></div><div class="line"><span class="attr">jiathis:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">false</span>   <span class="comment">## 默认使用主题内建分享</span></div><div class="line"><span class="attr">  id:</span>    </div><div class="line"><span class="attr">  tsina:</span> </div><div class="line">  </div><div class="line"><span class="comment">#### 网站统计</span></div><div class="line"><span class="attr">google_analytics:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  id:</span>            <span class="comment">## google analytics ID.</span></div><div class="line"><span class="attr">  site:</span>          <span class="comment">## 网站地址.</span></div><div class="line"><span class="attr">baidu_tongji:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  sitecode:</span>      <span class="comment">## 百度统计站点特征码</span></div><div class="line"><span class="attr">cnzz_tongji:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  siteid:</span>        <span class="comment">## CNZZ统计站点ID</span></div><div class="line"></div><div class="line"><span class="comment">#### 杂项</span></div><div class="line"><span class="attr">ShowCustomFont:</span> <span class="literal">true</span>  </div><div class="line"><span class="attr">fancybox:</span> <span class="literal">true</span>        </div><div class="line"><span class="attr">totop:</span> <span class="literal">true</span>           </div><div class="line"></div><div class="line"><span class="comment">#### 自定义搜索</span></div><div class="line"><span class="attr">google_cse:</span> </div><div class="line"><span class="attr">  enable:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  cx:</span>  </div><div class="line"><span class="attr">baidu_search:</span>    </div><div class="line"><span class="attr">  enable:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  id:</span>   </div><div class="line"><span class="attr">  site:</span> <span class="attr">http://zhannei.baidu.com/cse/search</span> </div><div class="line"><span class="attr">tinysou_search:</span>     <span class="comment">## http://tinysou.com/</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  id:</span> <span class="string">"4ac092ad8d749fdc6293"</span></div></pre></td></tr></table></figure>
+<p>###属性功能</p>
+<ul>
+<li><strong>菜单 menu</strong><br>默认没有启用 <code>/tags</code> 和 <code>/categories</code>页面，如果需要启用请在博客目录下的<code>source</code>文件夹中分别建立<code>tags</code> 和 <code>categories</code>文件夹每个文件夹中分别包含一个<code>index.md</code>文件。内容为：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">layout:</span> <span class="string">tags</span> <span class="string">(或categories)</span></div><div class="line"><span class="attr">title:</span> <span class="string">tags</span> <span class="string">(或categories)</span></div><div class="line"><span class="meta">---</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因为主题中已经内置了这两个页面的模板，所以他们会被正确的解析出来。</p>
+<ul>
+<li><p><strong>控件 widgets</strong><br>提供了7种小工具。包括标签、标签云、分类、归档、RSS、友情链接、微博秀。</p>
+<p><strong>友情链接</strong>：友情链接的网址添加可以在<code>links</code>属性下添加。</p>
+<p><strong>微博秀</strong>：需要注意的是，如果要启用微博秀，您必须填上<code>author</code>属性下<code>tsina</code>和<code>weibo_verifier</code>的值，前者是您微博ID，后者是您微博秀的验证码，访问 <a href="http://app.weibo.com/tool/weiboshow" target="_blank" rel="external">http://app.weibo.com/tool/weiboshow</a> 在如下图位置，可以获得您的 verifier，如：我的是<code>b3593ceb</code>。<br><img src="http://ww1.sinaimg.cn/large/81b78497jw1emegd6b0ytj209204pweu.jpg" alt=""></p>
+<p>如果要关闭侧边栏，将<code>close_aside</code>置为<code>true</code>，就会在博文页面自动关闭侧边栏。</p>
+</li>
+<li><p><strong>图片相关 Image</strong><br>本主题可以设置网站相关图片，例如网站图标（<code>favicon</code>）、网站logo（<code>imglogo</code>）、作者头像（<code>author_img</code>）。建议启用网站logo，格式建议为<code>.svg</code>或<code>.png</code>格式。同时建议提供配套的 favicon 以及在苹果设备上的图标<code>apple_icon</code>（背景不要透明）。</p>
+</li>
+<li><p><strong>首页显示模式 Index</strong><br>目前首页的显示模式支持两种，一种是原先的卡片式（前往 <a href="http://wuchong.me/jacman" target="_blank" rel="external">Demo</a> 预览），另一种是类似官方主题的文章展开式（<a href="http://wuchong.me" target="_blank" rel="external">本站</a>即采用的这种）。两者各有优劣，前者首页加载速度更快，后者文章内容更能吸引读者。主题默认采用后一种展开式，如需开启第一种卡片式，请设置<code>index</code>属性下的<code>expand: false</code>。</p>
+<p>卡片式的文章摘要是截取文章内容的前140个字，也可以自己总结<code>description</code>并将其放在开头的<code>front-matter</code>中。展开式的文章摘要就是使用<code>&lt;!-- more --&gt;</code>截取了。</p>
+</li>
+<li><p><strong>作者信息 author</strong><br>作者信息，建议尽量填写完整。其中<code>tsina</code>是你的新浪微博ID，不同于用户名或微博主页地址。启用这个属性后，其他用户在微博上分享你文章的同时会自动@你。同时它和<code>weibo_verifier</code>一起作用生成微博秀。<code>intro_line1</code>和<code>intro_line2</code>是网站底部的个人介绍。<code>weibo</code>、<code>twitter</code>、<code>facebook</code>等是用来显示网站右下角的社交按钮的，如下图所示。<br><img src="http://ww4.sinaimg.cn/large/81b78497jw1emgscr3575j2078050jrc.jpg" alt=""></p>
+</li>
+<li><p><strong>目录 toc</strong><br>是否启用在文章中或侧边栏中的目录功能。二者可以都为<code>true</code>或都为<code>false</code>。同时，如果你希望在特定的某一篇文章中关闭目录功能你可以在文章文件开头中的<code>front-matter</code>中加上一行<code>toc: false</code>。如果希望在某一篇文章中关闭目录自动编号功能你可以在文章文件开头的<code>front-matter</code>中加上一行<code>list_number: false</code>。另外 hexo 2.5.2 开始支持中文目录，想获得更好的体验请升级你的 Hexo 版本。</p>
+</li>
+<li><p><strong>评论 comments</strong><br>填写<code>duoshuo_shortname</code><a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>的用户名，启用多说评论系统。在大陆地区更好用的评论系统。</p>
+<p>填写<code>disqus_shortname</code><a href="http://disqus.com/" target="_blank" rel="external">disqus</a> 的用户名，启用 disqus 评论系统。国际上更广泛使用的评论系统。设置博客根目录下的<code>_config.yml</code>文件中的<code>disqus_shortname</code>同样也能开启该功能。</p>
+</li>
+<li><p><strong>加网分享 jiathis</strong><br><a href="http://www.jiathis.com/" target="_blank" rel="external">加网</a>分享系统。默认关闭，因为主题已经内置了原生的分享功能。</p>
+</li>
+<li><p><strong>网站统计 Analytics</strong><br><code>google_analytics</code>：Google Analytics追踪代码。请注意：Google Analytics已经升级到了Universal Analytics。请先前往后台升级你的Google Analytics版本后再启用追踪代码，更多信息请<a href="https://developers.google.com/analytics/devguides/collection/upgrade/?hl=zh_CN" target="_blank" rel="external">点击这里</a>了解。</p>
+<p><code>baidu_tongji</code>：百度统计功能。需要填写站点特征码<code>sitecode</code>，在<a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">官网</a>注册并配置站点后，获取特征码。特征码可以在「网站中心」-&gt; 「代码获取」中查看，如下图所示的<code>e6d1f421bbc9962127a50488f9ed37d1</code>，注意去掉前面的<code>3F</code>。<br><img src="http://ww4.sinaimg.cn/large/81b78497jw1emf4v6qf91j20kf07sq8v.jpg" alt=""></p>
+<p><code>cnzz_tongji</code>：站长统计功能。需要填写站点ID<code>siteid</code>，同理在<a href="http://www.cnzz.com" target="_blank" rel="external">站长官网</a>注册并配置站点后获得。</p>
+</li>
+<li><p><strong>数学公式 mathjax</strong><br>主题支持写 LaTex 数学公式。只需要在文章文件开头的<code>front-matter</code>中，加上一行<code>mathjax: true</code>，即可在文中写 LaTex 公式。</p>
+</li>
+<li><p><strong>图片浏览 fancybox</strong><br>默认关闭，如果你使用 Hexo 经常发表 Gallery 类型的文章，那么请设置为<code>true</code>。</p>
+</li>
+<li><p><strong>返回顶部 totop</strong><br>右下角<code>返回顶部</code>按钮，默认开启。</p>
+</li>
+<li><p><strong>自定义字体 ShowCustomFont</strong><br>是否启用自定义字体，默认开启，主要用于显示网站底部的字体。如果你有一定前端基础可以修改 font.styl 替换为你喜欢的字体。</p>
+</li>
+<li><p><strong>自定义搜索 Search</strong><br><code>baidu_search</code>：如果开启百度站内搜索需要登录 <a href="http://zn.baidu.com/" target="_blank" rel="external">百度站内搜索</a>，配置好你的站点，并开启站内搜索获取搜索ID，另外<code>site</code>属性可以填默认值，也可以填自己做了CNAME的二级域名，更详细的可以阅读<a href="http://gengbiao.me/hexo/hexo%E6%B7%BB%E5%8A%A0%E7%99%BE%E5%BA%A6%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2/" target="_blank" rel="external">这篇博客</a>了解。</p>
+<p><code>google_cse</code>：如果开启谷歌自定义搜索需要先登录 <a href="https://www.google.com/cse/" target="_blank" rel="external">Google CSE</a>，配置好你的站点，并获得此自定义搜索的ID。此外你需要在博客目录下的<code>source</code>文件夹中建立<code>search</code>文件夹并包含一个<code>index.md</code>文件。内容为：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">layout:</span> <span class="string">search</span></div><div class="line"><span class="attr">title:</span> <span class="string">search</span></div><div class="line"><span class="meta">---</span></div></pre></td></tr></table></figure>
+<p><code>tiny_search</code>: 如果要开启<a href="http://tinysou.com/" target="_blank" rel="external">微搜索</a>，需要先注册一个帐号，配置一个Engine，将Engine的Key填入配置文件中的<code>id</code>即可。</p>
+</li>
+<li><p><strong>主题颜色更改 Theme Color</strong></p>
+</li>
+</ul>
+<p>目前官方还未支持十六进制颜色与String值的转换，所以需要手动添加依赖包，该问题估计不久后会解决。</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">##在博客的目录下输入下面指令</span></div><div class="line">cd node_modules/hexo-renderer-stylus </div><div class="line">sudo npm install stylus<span class="symbol">@0</span><span class="number">.49</span><span class="number">.2</span>  <span class="meta">#根据系统文件的权限不同，有的不需要加sudo</span></div></pre></td></tr></table></figure>
+<p>然后更改在主题目录下的<code>_config.yml</code>的 <code>theme_color</code> 下 <code>theme</code> 值。<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">### Theme Color </div><div class="line">theme_color:</div><div class="line">    theme: <span class="string">'#2ca6cb'</span>    ##the defaut theme color is blue</div></pre></td></tr></table></figure></p>
+<p>##常见问题</p>
+<ul>
+<li><p><strong>Q：图片默认都是居左的，我怎么设置能让图片居中呢？</strong></p>
+<blockquote>
+<p>使用 <code>&lt;img src=&quot;&quot; style=&quot;display:block;margin:auto&quot;/&gt;</code>的HTML标签。</p>
+</blockquote>
+</li>
+<li><p><strong>Q：如何建立一篇图片类文章（Gallery Post）？</strong></p>
+<blockquote>
+<p>使用<code>hexo new photo &quot;your titile&quot;</code>建立图片类文章，或者直接新建一个 Markdown 文件，将其<code>front-matter</code>修改为如下，即可看到主题为图片类文章提供的样式，<a href="http://wuchong.me/jacman/gallery" target="_blank" rel="external">Demo</a>。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">---</span></div><div class="line"><span class="attr">layout:</span> <span class="string">photo</span></div><div class="line"><span class="attr">title:</span> <span class="string">Gallery</span> <span class="string">Post</span></div><div class="line"><span class="attr">photos:</span></div><div class="line"><span class="attr">- http:</span><span class="string">//i.minus.com/ibobbTlfxZgITW.jpg</span></div><div class="line"><span class="attr">- http:</span><span class="string">//i.minus.com/iedpg90Y0exFS.jpg</span></div><div class="line"><span class="meta">---</span></div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p><strong>Q：我在配置文件中给某一项设置了值，但为什么总是看不到效果啊？</strong></p>
+<blockquote>
+<p><code>_config.yml</code>文件中的每个属性值前面必须留一个空格，建议在 Sublime/Notepad++ 中开启显示所有空格模式。另每篇文章的 <code>front-matter</code> 也要注意这个问题。</p>
+</blockquote>
+</li>
+<li><p><strong>Q：如何建立自我介绍页面（About 页面）？</strong></p>
+<blockquote>
+<p>首先在主目录找到<code>_config.yml</code>，找到url添加<code>about_dir: about</code>到这个板块。然后在<code>/source</code>里面建立about文件夹。在about文件夹里建立index.md。编辑index.md就和发布其他的文章一样，格式都一样。</p>
+</blockquote>
+</li>
+<li><p><strong>Q：怎么提意见和建议？</strong></p>
+<blockquote>
+<p>主题还在不断完善中，欢迎 <a href="https://github.com/wuchong/jacman/issues" target="_blank" rel="external">open issue</a> 来提建议，参与讨论。</p>
+</blockquote>
+</li>
+<li><p><strong>Q：楼主我不喜欢你的配色，怎么换主题的颜色呢？</strong></p>
+<blockquote>
+<p>包括颜色在内的很多变量都在<code>jacman/source/css/_base/variable.styl</code>文件中，可以修改成你喜欢的。</p>
+</blockquote>
+</li>
+<li><p><strong>Q：英语更能突显我的逼格，怎么换成英语？</strong></p>
+<blockquote>
+<p>配置你的博客根目录下的<code>_config.yml</code>，去掉<code>language: zh-CN</code>。</p>
+</blockquote>
+</li>
+<li><p><strong>Q：为什么我修改了配置文件/发表了博文，解析出来的却是乱码呢？ </strong></p>
+<blockquote>
+<p>请将你的配置文件/markdown文件保存成 <code>UTF-8</code> 格式。</p>
+</blockquote>
+</li>
+<li><p><strong>Q：为什么开启了微博秀后，显示是空白的，没有内容展示？ </strong></p>
+<blockquote>
+<p>每次修改参数都会这样，需要多刷新几次或者上传到服务器上就好了。</p>
+</blockquote>
+</li>
+<li><p><strong>Q：博主 Jacman Demo 站点中文章的 md 源文件在哪能看到呢？ </strong></p>
+<blockquote>
+<p>我将 Demo 站点所有源文件放在了 Jacman 的 <a href="https://github.com/wuchong/jacman/tree/site" target="_blank" rel="external">site</a> 分支下。</p>
+</blockquote>
+</li>
+</ul>
+<p><em>PS:有任何关于 Hexo 的问题，欢迎来 <a href="https://coderq.com/c/tech/hexo" target="_blank" rel="external">Hexo 中文社区</a> 咨询。</em></p>
+<p>###参考网站</p>
+<ol>
+<li><a href="http://wuchong.me/jacman/" target="_blank" rel="external">Jacman作者的blog</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      Jacman 是一款扁平化，有着响应式设计的 Hexo 主题。本站正式使用了 Jacman 主题。Jacman 基于 Pacman 主题修改而来，而今已有很多特性与原主题不同。你可以前往本站和 Demo 预览更多关于本主题的更多效果。如果你有任何问题或意见欢迎到 GitHub 发表 issue。
+    
+    </summary>
+    
+      <category term="Hexo" scheme="http://jamfliu.github.io/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="http://jamfliu.github.io/tags/Hexo/"/>
+    
+      <category term="Jacman" scheme="http://jamfliu.github.io/tags/Jacman/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MarkDown的用法介绍</title>
+    <link href="http://jamfliu.github.io/2015/07/28/markdown_usage_intraduce/"/>
+    <id>http://jamfliu.github.io/2015/07/28/markdown_usage_intraduce/</id>
+    <published>2015-07-27T16:53:31.000Z</published>
+    <updated>2017-05-17T05:10:57.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#MarkDown的用法介绍</p>
+<h2 id="Markdown简介"><a href="#Markdown简介" class="headerlink" title="Markdown简介"></a>Markdown简介</h2><blockquote>
+<p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— <a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">维基百科</a></p>
+</blockquote>
+<p>正如您在阅读的这份文档，它使用简单的符号标识不同的标题，将某些文字标记为<strong>粗体</strong>或者<em>斜体</em>，创建一个<a href="http://www.example.com" target="_blank" rel="external">链接</a>或一个脚注[^demo]。下面列举了几个高级功能，更多语法请按<code>Cmd + /</code>查看帮助。 </p>
+<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line">ipMap = &#123;&#125;</div><div class="line">ipFilters = [<span class="string">"10."</span>, <span class="string">"172."</span>]</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isFiltered</span><span class="params">(inIp)</span>:</span></div><div class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> ipFilters:</div><div class="line">        <span class="keyword">if</span> inIp.startswith(ip):</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">    line = line.strip()</div><div class="line">    <span class="keyword">if</span> line:</div><div class="line">        words = line.split(<span class="string">":"</span>)</div><div class="line">        <span class="keyword">if</span> words <span class="keyword">and</span> len(words) &gt; <span class="number">1</span>:</div><div class="line">            <span class="keyword">if</span> isFiltered(words[<span class="number">1</span>]):</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">elif</span> ipMap.get(words[<span class="number">1</span>]):</div><div class="line">                ipMap[words[<span class="number">1</span>]] += <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                ipMap[words[<span class="number">1</span>]] = <span class="number">1</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> (key, value) <span class="keyword">in</span> ipMap.items():</div><div class="line">    <span class="keyword">print</span> <span class="string">"%-16s %d"</span> % (key,value)</div></pre></td></tr></table></figure>
+<h3 id="LaTeX-公式"><a href="#LaTeX-公式" class="headerlink" title="LaTeX 公式"></a>LaTeX 公式</h3><p>可以创建行内公式，例如 $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$。或者块级公式：</p>
+<p>$$    x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</p>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Item</th>
+<th style="text-align:right">Value</th>
+<th style="text-align:center">Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Computer</td>
+<td style="text-align:right">1600 USD</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:left">Phone</td>
+<td style="text-align:right">12 USD</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td style="text-align:left">Pipe</td>
+<td style="text-align:right">1 USD</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: Start</div><div class="line">e=&gt;end</div><div class="line">op=&gt;operation: My Operation</div><div class="line">cond=&gt;condition: Yes or No?</div><div class="line"></div><div class="line">st-&gt;op-&gt;cond</div><div class="line">cond(yes)-&gt;e</div><div class="line">cond(no)-&gt;op</div></pre></td></tr></table></figure>
+<p>以及时序图:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Alice-&gt;Bob: Hello Bob, how are you?</div><div class="line">Note right of Bob: Bob thinks</div><div class="line">Bob--&gt;Alice: I am good thanks!</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>提示：</strong>想了解更多，请查看<strong>流程图</strong><a href="http://adrai.github.io/flowchart.js/" target="_blank" rel="external">语法</a>以及<strong>时序图</strong><a href="http://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="external">语法</a>。</p>
+</blockquote>
+<h3 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h3><p>使用 <code>- [ ]</code> 和 <code>- [x]</code> 语法可以创建复选框，实现 todo-list 等功能。例如：</p>
+<ul>
+<li>[x] 已完成事项</li>
+<li>[ ] 待办事项1</li>
+<li>[ ] 待办事项2</li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong>目前支持尚不完全，在印象笔记中勾选复选框是无效、不能同步的，所以必须在<strong>马克飞象</strong>中修改 Markdown 原文才可生效。下个版本将会全面支持。</p>
+</blockquote>
+<h2 id="印象笔记相关"><a href="#印象笔记相关" class="headerlink" title="印象笔记相关"></a>印象笔记相关</h2><h3 id="笔记本和标签"><a href="#笔记本和标签" class="headerlink" title="笔记本和标签"></a>笔记本和标签</h3><p><strong>马克飞象</strong>增加了<code>@(笔记本)[标签A|标签B]</code>语法, 以选择笔记本和添加标签。 <strong>绑定账号后</strong>， 输入<code>(</code>自动会出现笔记本列表，请从中选择。</p>
+<h3 id="笔记标题"><a href="#笔记标题" class="headerlink" title="笔记标题"></a>笔记标题</h3><p><strong>马克飞象</strong>会自动使用文档内出现的第一个标题作为笔记标题。例如本文，就是第一行的 <code>欢迎使用马克飞象</code>。</p>
+<h3 id="快捷编辑"><a href="#快捷编辑" class="headerlink" title="快捷编辑"></a>快捷编辑</h3><p>保存在印象笔记中的笔记，右上角会有一个红色的编辑按钮，点击后会回到<strong>马克飞象</strong>中打开并编辑该笔记。</p>
+<blockquote>
+<p><strong>注意：</strong>目前用户在印象笔记中单方面做的任何修改，马克飞象是无法自动感知和更新的。所以请务必回到马克飞象编辑。</p>
+</blockquote>
+<h3 id="数据同步"><a href="#数据同步" class="headerlink" title="数据同步"></a>数据同步</h3><p><strong>马克飞象</strong>通过<strong>将Markdown原文以隐藏内容保存在笔记中</strong>的精妙设计，实现了对Markdown的存储和再次编辑。既解决了其他产品只是单向导出HTML的单薄，又规避了服务端存储Markdown带来的隐私安全问题。这样，服务端仅作为对印象笔记 API调用和数据转换之用。</p>
+<blockquote>
+<p><strong>隐私声明：用户所有的笔记数据，均保存在印象笔记中。马克飞象不存储用户的任何笔记数据。</strong></p>
+</blockquote>
+<h3 id="离线存储"><a href="#离线存储" class="headerlink" title="离线存储"></a>离线存储</h3><p><strong>马克飞象</strong>使用浏览器离线存储将内容实时保存在本地，不必担心网络断掉或浏览器崩溃。为了节省空间和避免冲突，已同步至印象笔记并且不再修改的笔记将删除部分本地缓存，不过依然可以随时通过<code>文档管理</code>打开。</p>
+<blockquote>
+<p><strong>注意：</strong>虽然浏览器存储大部分时候都比较可靠，但印象笔记作为专业云存储，更值得信赖。以防万一，<strong>请务必经常及时同步到印象笔记</strong>。</p>
+</blockquote>
+<h2 id="编辑器相关"><a href="#编辑器相关" class="headerlink" title="编辑器相关"></a>编辑器相关</h2><h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><p>右侧系统菜单（快捷键<code>Cmd + M</code>）的<code>设置</code>中，提供了界面字体、字号、自定义CSS、vim/emacs 键盘模式等高级选项。</p>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p>帮助    <code>Cmd + /</code><br>同步文档    <code>Cmd + S</code><br>创建文档    <code>Cmd + Opt + N</code><br>最大化编辑器    <code>Cmd + Enter</code><br>预览文档 <code>Cmd + Opt + Enter</code><br>文档管理    <code>Cmd + O</code><br>系统菜单    <code>Cmd + M</code> </p>
+<p>加粗    <code>Cmd + B</code><br>插入图片    <code>Cmd + G</code><br>插入链接    <code>Cmd + L</code><br>提升标题    <code>Cmd + H</code></p>
+<h2 id="关于收费"><a href="#关于收费" class="headerlink" title="关于收费"></a>关于收费</h2><p><strong>马克飞象</strong>为新用户提供 10 天的试用期，试用期过后需要<a href="maxiang.info/vip.html">续费</a>才能继续使用。未购买或者未及时续费，将不能同步新的笔记。之前保存过的笔记依然可以编辑。</p>
+<h2 id="反馈与建议"><a href="#反馈与建议" class="headerlink" title="反馈与建议"></a>反馈与建议</h2><ul>
+<li>微博：<a href="http://weibo.com/u/2788354117" target="_blank" rel="external">@马克飞象</a>，<a href="http://weibo.com/ggock" title="开发者个人账号" target="_blank" rel="external">@GGock</a></li>
+<li>邮箱：<a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#104;&#x75;&#115;&#x74;&#103;&#111;&#99;&#107;&#x40;&#103;&#109;&#97;&#105;&#108;&#46;&#x63;&#111;&#109;">&#104;&#x75;&#115;&#x74;&#103;&#111;&#99;&#107;&#x40;&#103;&#109;&#97;&#105;&#108;&#46;&#x63;&#111;&#109;</a></li>
+</ul>
+<hr>
+<p>感谢阅读这份帮助文档。请点击右上角，绑定印象笔记账号，开启全新的记录与分享体验吧。</p>
+<p>[^demo]: 这是一个示例脚注。请查阅 <a href="https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide#footnotes" target="_blank" rel="external">MultiMarkdown 文档</a> 关于脚注的说明。 <strong>限制：</strong> 印象笔记的笔记内容使用 <a href="https://dev.yinxiang.com/doc/articles/enml.php" target="_blank" rel="external">ENML</a> 格式，基于 HTML，但是不支持某些标签和属性，例如id，这就导致<code>脚注</code>和<code>TOC</code>无法正常点击。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#MarkDown的用法介绍&lt;/p&gt;
+&lt;h2 id=&quot;Markdown简介&quot;&gt;&lt;a href=&quot;#Markdown简介&quot; class=&quot;headerlink&quot; title=&quot;Markdown简介&quot;&gt;&lt;/a&gt;Markdown简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Mar
+    
+    </summary>
+    
+    
+      <category term="markdown" scheme="http://jamfliu.github.io/tags/markdown/"/>
+    
+  </entry>
+  
+</feed>
