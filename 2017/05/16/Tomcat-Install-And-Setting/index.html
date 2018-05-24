@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/lzffavicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/lzffavicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/lzffavicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/lzffavicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Tomcat,Tomcat优化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="留阵～风～" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Tomcat 8 安装和配置、优化1. Tomcat 8 安装目标 安装h环境：rebhat 6.1 (linux通用) 安装目录：/opt/extra/apache-tomcat-8.5.31 java目录：/opt/java/jdk1.8.0_91 启动方式：service tomcat8 start 配置： 更新端口，可以增加数据源，配置系统服务，安全考虑2. Tomcat 8 安装2.">
+<meta name="keywords" content="Tomcat,Tomcat优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【原创】Tomcat8 安装和配置、优化">
+<meta property="og:url" content="http://jamfliu.github.io/2017/05/16/Tomcat-Install-And-Setting/index.html">
+<meta property="og:site_name" content="留阵～风～">
+<meta property="og:description" content="Tomcat 8 安装和配置、优化1. Tomcat 8 安装目标 安装h环境：rebhat 6.1 (linux通用) 安装目录：/opt/extra/apache-tomcat-8.5.31 java目录：/opt/java/jdk1.8.0_91 启动方式：service tomcat8 start 配置： 更新端口，可以增加数据源，配置系统服务，安全考虑2. Tomcat 8 安装2.">
+<meta property="og:updated_time" content="2018-05-24T17:12:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【原创】Tomcat8 安装和配置、优化">
+<meta name="twitter:description" content="Tomcat 8 安装和配置、优化1. Tomcat 8 安装目标 安装h环境：rebhat 6.1 (linux通用) 安装目录：/opt/extra/apache-tomcat-8.5.31 java目录：/opt/java/jdk1.8.0_91 启动方式：service tomcat8 start 配置： 更新端口，可以增加数据源，配置系统服务，安全考虑2. Tomcat 8 安装2.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jamfliu.github.io/2017/05/16/Tomcat-Install-And-Setting/"/>
+
+
+
+
+
+  <title>【原创】Tomcat8 安装和配置、优化 | 留阵～风～</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3fb9e4d48bc478a2892d60f9e3fe51be";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+
+    <a href="https://github.com/jamfliu">
+       <img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">留阵～风～</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">人咬得菜根，则百事可做</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jamfliu.github.io/2017/05/16/Tomcat-Install-And-Setting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jamefeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lzf.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="留阵～风～">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">【原创】Tomcat8 安装和配置、优化</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T18:58:35+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index">
+                    <span itemprop="name">IT</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/05/16/Tomcat-Install-And-Setting/" class="leancloud_visitors" data-flag-title="【原创】Tomcat8 安装和配置、优化">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="字数统计">
+                  1,108
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>﻿</p>
+<h1 id="Tomcat-8-安装和配置、优化"><a href="#Tomcat-8-安装和配置、优化" class="headerlink" title="Tomcat 8 安装和配置、优化"></a>Tomcat 8 安装和配置、优化</h1><h2 id="1-Tomcat-8-安装目标"><a href="#1-Tomcat-8-安装目标" class="headerlink" title="1. Tomcat 8 安装目标"></a>1. Tomcat 8 安装目标</h2><ul>
+<li>安装h环境：rebhat 6.1 (linux通用)</li>
+<li>安装目录：<code>/opt/extra/apache-tomcat-8.5.31</code></li>
+<li>java目录：<code>/opt/java/jdk1.8.0_91</code></li>
+<li>启动方式：<code>service tomcat8 start</code></li>
+<li>配置：<ul>
+<li>更新端口，可以增加数据源，配置系统服务，安全考虑<h2 id="2-Tomcat-8-安装"><a href="#2-Tomcat-8-安装" class="headerlink" title="2. Tomcat 8 安装"></a>2. Tomcat 8 安装</h2><h3 id="2-1-安装来源以及简介"><a href="#2-1-安装来源以及简介" class="headerlink" title="2.1. 安装来源以及简介"></a>2.1. 安装来源以及简介</h3></li>
+</ul>
+</li>
+<li>官网：<a href="http://tomcat.apache.org/" target="_blank" rel="external">http://tomcat.apache.org/</a></li>
+<li>Tomcat 8 官网下载：<a href="http://tomcat.apache.org/download-80.cgi" target="_blank" rel="external">http://tomcat.apache.org/download-80.cgi</a></li>
+<li>此时（20180524） Tomcat 8 最新版本为：<code>apache-tomcat-8.5.31.zip</code><h3 id="2-2-安装目录"><a href="#2-2-安装目录" class="headerlink" title="2.2. 安装目录"></a>2.2. 安装目录</h3></li>
+<li>我个人习惯 <code>/opt</code> 目录下创建一个目录 <code>software</code> 用来存放各种软件安装包；在 <code>/opt</code> 目录下创建一个 <code>apps</code> 用来存放各种解压后的软件包，下面的讲解也都是基于此习惯。不过下面是公司的按照我会按照<code>opt/extra/</code>来。<ul>
+<li>压缩包解压：<code>unzip apache-tomcat-8.5.31.zip</code></li>
+<li>移到解压出来文件夹到 /usr 下：<code>mv apache-tomcat-8.5.31/ /opt/extra/</code><h3 id="2-3-更改端口（可跳过，根据需要修改）"><a href="#2-3-更改端口（可跳过，根据需要修改）" class="headerlink" title="2.3. 更改端口（可跳过，根据需要修改）"></a>2.3. 更改端口（可跳过，根据需要修改）</h3></li>
+</ul>
+</li>
+<li>1) 编辑tomcat配置文件<ul>
+<li>编辑tomcat配置文件<code>$tomcat_home/conf/server.xml</code> ，此处为：<code>/opt/extra/apache-tomcat-8.5.31/conf/server.xml</code></li>
+</ul>
+</li>
+<li><p>2) 更改服务关闭端口</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Server</span> <span class="attr">port</span>=<span class="string">"8205"</span> <span class="attr">shutdown</span>=<span class="string">"SHUTDOWN"</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>3) 更改HTTP端口</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8280"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span></span></div><div class="line">       <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span></div><div class="line">       <span class="attr">redirectPort</span>=<span class="string">"8643"</span> /&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>4) 更改AJP端口</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8209"</span> <span class="attr">protocol</span>=<span class="string">"AJP/1.3"</span> <span class="attr">redirectPort</span>=<span class="string">"8643"</span> /&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-4-配置数据源（可跳过，根据需要修改）"><a href="#2-4-配置数据源（可跳过，根据需要修改）" class="headerlink" title="2.4. 配置数据源（可跳过，根据需要修改）"></a>2.4. 配置数据源（可跳过，根据需要修改）</h3><ul>
+<li>1) 更新端口<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Resource</span> <span class="attr">name</span>=<span class="string">"test/b2c"</span> <span class="attr">auth</span>=<span class="string">"Container"</span> <span class="attr">driverClassName</span>=<span class="string">"oracle.jdbc.driver.OracleDriver"</span> <span class="attr">defaultAutoCommit</span>=<span class="string">"true"</span></span></div><div class="line">             <span class="attr">maxActive</span>=<span class="string">"20"</span> <span class="attr">maxWait</span>=<span class="string">"10000"</span> <span class="attr">initialSize</span>=<span class="string">"10"</span> <span class="attr">maxTotal</span>=<span class="string">"20"</span> <span class="attr">maxIdle</span>=<span class="string">"10"</span></div><div class="line">             <span class="attr">username</span>=<span class="string">"test_app_1"</span> <span class="attr">password</span>=<span class="string">"**********"</span> <span class="attr">type</span>=<span class="string">"javax.sql.DataSource"</span></div><div class="line">             <span class="attr">url</span>=<span class="string">"jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=xxx.xxx.xx1)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=xxx.xxx.xx2)(PORT=1521))(LOAD_BALANCE=on)(FAILOVER=on))(CONNECT_DATA=(SERVICE_NAME=service.xxxx.com)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC))))"</span> </div><div class="line">             <span class="attr">validationQuery</span>=<span class="string">"SELECT sysdate FROM dual"</span> <span class="attr">testOnBorrow</span>=<span class="string">"true"</span>/&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-5-配置启动脚本服务（官方推荐在-CATALINA-BASE-bin-setenv-sh）"><a href="#2-5-配置启动脚本服务（官方推荐在-CATALINA-BASE-bin-setenv-sh）" class="headerlink" title="2.5. 配置启动脚本服务（官方推荐在$CATALINA_BASE/bin/setenv.sh）"></a>2.5. 配置启动脚本服务（官方推荐在$CATALINA_BASE/bin/setenv.sh）</h3><ul>
+<li><p>1) 为避免环境冲突，配置变量。编辑<code>vim /opt/extra/apache-tomcat-8.5.31/bin/setenv.sh</code>  然后保存 (可选, 官方recommended这种。 或者在catalina.sh在配置文件的可编辑内容最上面添加)</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">JRE_HOME</span>=/opt/java/jdk1.<span class="number">8.0</span>_91</div><div class="line"><span class="attr">CATALINA_PID</span>=<span class="string">"$CATALINA_BASE/tomcat.pid"</span></div><div class="line"><span class="comment"># CATALINA_PID=`cd ../;pwd`/tomcat.pid  #或者这种方式 # 可以不用   JAVA_HOME=/opt/java/jdk1.8.0_91</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>2) 常用命令</p>
+<ul>
+<li>启动 <ul>
+<li><code>/opt/extra/apache-tomcat-8.5.31/catalina.sh start</code></li>
+<li><code>sh /opt/extra/apache-tomcat-8.5.31/bin/startup.sh</code>  ； 可以边启动边查看日志 ;<code>sh  /opt/extra/apache-tomcat-8.5.31/bin/startup.sh; tail -200f /usr/program/tomcat8/logs/catalina.out</code> </li>
+</ul>
+</li>
+<li><p>关闭 <code>sh  /opt/extra/apache-tomcat-8.5.31/bin/shutdown.sh</code>  或者   <code>cat /opt/extra/apache-tomcat-8.5.31/tomcat.pid | xargs kill -9</code> 或者  /opt/extra/apache-tomcat-8.5.31/bin/catalina.sh stop</p>
+</li>
+<li><p>查看服务 <code>ps aux|grep tomcat|grep -v grep</code></p>
+<h3 id="2-6-配置系统服务"><a href="#2-6-配置系统服务" class="headerlink" title="2.6. 配置系统服务"></a>2.6. 配置系统服务</h3></li>
+</ul>
+</li>
+<li>1)  配置JSVC服务启动方式 （为什么要用，查看附录说明）<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /opt/tomcat/apache-tomcat-7.0.52/bin</div><div class="line">tar xvfz commons-daemon-native.tar.gz</div><div class="line">cd commons-daemon-1.0.15-native-src/unix</div><div class="line">./configure --with-java=/opt/java/java-7-oracle</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="解答环境"><a href="#解答环境" class="headerlink" title="解答环境"></a>解答环境</h2><ul>
+<li>export 在子shell，父shell中的变量传递<ul>
+<li>子 shell 对父 shell 里 export 出来的变量进行修改并不能影响到父 shell</li>
+<li>子 shell 只是在“导出变量列表“里对该变量进行了一个拷贝。但反过来，父shell再次更改此变量时，子 shell 再去读时，读到的是新值，而不是原来的值。</li>
+</ul>
+</li>
+<li>为什么要用jsvc<ul>
+<li>Jsvc is a set of libraries and applications for making Java applications run on UNIX more easily. Jsvc allows the application (e.g. Tomcat) to perform some privileged operations as root (e.g. bindto a port &lt; 1024), and then switch identity to a non-privileged user. </li>
+<li>使用jsvc管理Tomcat的运行，相比使用其他方式最大的优势是可以使Tomcat以root身份做一些非root身份做不了的事，例如绑定端口到小与1024的端口，例如80。 </li>
+<li>通常为了安全考虑，linux服务器上运行Tomcat程序的进程其身份均不为root，这为Tomcat的正常使用带来了一些限制，使用jsvc恰好可以弥补这些限制带来的不足。</li>
+</ul>
+</li>
+</ul>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><ul>
+<li><a href="http://tomcat.apache.org/tomcat-8.5-doc/setup.html" target="_blank" rel="external">http://tomcat.apache.org/tomcat-8.5-doc/setup.html</a></li>
+<li><a href="http://tomcat.apache.org/tomcat-8.5-doc/RUNNING.txt" target="_blank" rel="external">http://tomcat.apache.org/tomcat-8.5-doc/RUNNING.txt</a></li>
+<li><a href="http://tomcat.apache.org/tomcat-8.5-doc/BUILDING.txt" target="_blank" rel="external">http://tomcat.apache.org/tomcat-8.5-doc/BUILDING.txt</a></li>
+<li><a href="http://commons.apache.org/proper/commons-daemon/jsvc.html" target="_blank" rel="external">http://commons.apache.org/proper/commons-daemon/jsvc.html</a> </li>
+<li><https: youmeek.gitbooks.io="" linux-tutorial="" content="" markdown-file="" tomcat-install-and-settings.html=""></https:></li>
+<li><a href="http://www.jikexueyuan.com/course/2064_3.html?ss=1" target="_blank" rel="external">http://www.jikexueyuan.com/course/2064_3.html?ss=1</a></li>
+<li><a href="http://www.jikexueyuan.com/course/2064_3.html?ss=1" target="_blank" rel="external">http://www.jikexueyuan.com/course/2064_3.html?ss=1</a></li>
+<li><a href="http://www.wellho.net/mouth/2163_CATALINA-OPTS-v-JAVA-OPTS-What-is-the-difference-.html" target="_blank" rel="external">http://www.wellho.net/mouth/2163_CATALINA-OPTS-v-JAVA-OPTS-What-is-the-difference-.html</a></li>
+<li><a href="http://blog.csdn.net/sunlovefly2012/article/details/47395165" target="_blank" rel="external">http://blog.csdn.net/sunlovefly2012/article/details/47395165</a></li>
+<li><a href="http://blog.csdn.net/lifetragedy/article/details/7708724" target="_blank" rel="external">http://blog.csdn.net/lifetragedy/article/details/7708724</a></li>
+<li><a href="http://ihuangweiwei.iteye.com/blog/1233941" target="_blank" rel="external">http://ihuangweiwei.iteye.com/blog/1233941</a></li>
+<li><a href="http://www.cnblogs.com/ggjucheng/archive/2013/04/16/3024731.html" target="_blank" rel="external">http://www.cnblogs.com/ggjucheng/archive/2013/04/16/3024731.html</a></li>
+<li><a href="http://www.apelearn.com/study_v2/chapter23.html" target="_blank" rel="external">http://www.apelearn.com/study_v2/chapter23.html</a></li>
+<li><a href="http://blog.csdn.net/hanzheng260561728/article/details/51236131" target="_blank" rel="external">http://blog.csdn.net/hanzheng260561728/article/details/51236131</a></li>
+<li><a href="http://blog.csdn.net/attagain/article/details/38639007" target="_blank" rel="external">http://blog.csdn.net/attagain/article/details/38639007</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tomcat/" rel="tag"># Tomcat</a>
+          
+            <a href="/tags/Tomcat优化/" rel="tag"># Tomcat优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/16/Git-Usage/" rel="next" title="【原创】带你更好地理解和使用Git">
+                <i class="fa fa-chevron-left"></i> 【原创】带你更好地理解和使用Git
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODY3NS81MjQ2"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/lzf.png"
+                alt="jamefeng" />
+            
+              <p class="site-author-name" itemprop="name">jamefeng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jamfliu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/jamfliu" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tomcat-8-安装和配置、优化"><span class="nav-number">1.</span> <span class="nav-text">Tomcat 8 安装和配置、优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Tomcat-8-安装目标"><span class="nav-number">1.1.</span> <span class="nav-text">1. Tomcat 8 安装目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Tomcat-8-安装"><span class="nav-number">1.2.</span> <span class="nav-text">2. Tomcat 8 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-安装来源以及简介"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. 安装来源以及简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-安装目录"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. 安装目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-更改端口（可跳过，根据需要修改）"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. 更改端口（可跳过，根据需要修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-配置数据源（可跳过，根据需要修改）"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. 配置数据源（可跳过，根据需要修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-配置启动脚本服务（官方推荐在-CATALINA-BASE-bin-setenv-sh）"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. 配置启动脚本服务（官方推荐在$CATALINA_BASE/bin/setenv.sh）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-配置系统服务"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6. 配置系统服务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">2.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解答环境"><span class="nav-number">2.1.</span> <span class="nav-text">解答环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资料"><span class="nav-number">2.2.</span> <span class="nav-text">资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jamefeng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("RRpPl3beWKn2TycBqKs6y22c-gzGzoHsz", "AXO0Ql8DsD0jEmw8oQE3aSpP");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+</html>
