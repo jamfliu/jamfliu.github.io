@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="[TOC] Tomcat 8 安装和配置、优化1. Tomcat 8 安装目标 安装环境：rebhat 6.1 (linux通用) 安装目录：/opt/extra/apache-tomcat-8.5.31 java目录：/opt/java/jdk1.8.0_91 启动方式：service tomcat8 start 或者  配置： 更新端口，可以增加数据源，配置系统服务，jvm参数，安全考虑，服">
+<meta name="description" content="[TOC] #一、 Tomcat 8 安装目标  安装环境：rebhat 6.1 (linux通用) 安装目录：/opt/extra/apache-tomcat-8.5.31 java目录：/opt/java/jdk1.8.0_91 启动方式：service tomcat8 start 或者  配置： 更新端口，可以增加数据源，配置系统服务，jvm参数，安全考虑，服务器优化#二、 Tomcat">
 <meta name="keywords" content="Tomcat,Tomcat优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【原创】Tomcat8 安装和配置、优化">
 <meta property="og:url" content="http://jamfliu.github.io/2017/05/16/Tomcat-Install-And-Setting/index.html">
 <meta property="og:site_name" content="留阵～风～">
-<meta property="og:description" content="[TOC] Tomcat 8 安装和配置、优化1. Tomcat 8 安装目标 安装环境：rebhat 6.1 (linux通用) 安装目录：/opt/extra/apache-tomcat-8.5.31 java目录：/opt/java/jdk1.8.0_91 启动方式：service tomcat8 start 或者  配置： 更新端口，可以增加数据源，配置系统服务，jvm参数，安全考虑，服">
-<meta property="og:updated_time" content="2018-06-23T02:53:10.000Z">
+<meta property="og:description" content="[TOC] #一、 Tomcat 8 安装目标  安装环境：rebhat 6.1 (linux通用) 安装目录：/opt/extra/apache-tomcat-8.5.31 java目录：/opt/java/jdk1.8.0_91 启动方式：service tomcat8 start 或者  配置： 更新端口，可以增加数据源，配置系统服务，jvm参数，安全考虑，服务器优化#二、 Tomcat">
+<meta property="og:updated_time" content="2018-06-23T02:59:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【原创】Tomcat8 安装和配置、优化">
-<meta name="twitter:description" content="[TOC] Tomcat 8 安装和配置、优化1. Tomcat 8 安装目标 安装环境：rebhat 6.1 (linux通用) 安装目录：/opt/extra/apache-tomcat-8.5.31 java目录：/opt/java/jdk1.8.0_91 启动方式：service tomcat8 start 或者  配置： 更新端口，可以增加数据源，配置系统服务，jvm参数，安全考虑，服">
+<meta name="twitter:description" content="[TOC] #一、 Tomcat 8 安装目标  安装环境：rebhat 6.1 (linux通用) 安装目录：/opt/extra/apache-tomcat-8.5.31 java目录：/opt/java/jdk1.8.0_91 启动方式：service tomcat8 start 或者  配置： 更新端口，可以增加数据源，配置系统服务，jvm参数，安全考虑，服务器优化#二、 Tomcat">
 
 
 
@@ -408,7 +408,7 @@
                 </span>
                 
                 <span title="字数统计">
-                  1,740
+                  1,732
                 </span>
               
 
@@ -444,21 +444,22 @@
 
       
         <p>﻿<br>[TOC]</p>
-<h1 id="Tomcat-8-安装和配置、优化"><a href="#Tomcat-8-安装和配置、优化" class="headerlink" title="Tomcat 8 安装和配置、优化"></a>Tomcat 8 安装和配置、优化</h1><h2 id="1-Tomcat-8-安装目标"><a href="#1-Tomcat-8-安装目标" class="headerlink" title="1. Tomcat 8 安装目标"></a>1. Tomcat 8 安装目标</h2><ul>
+<p>#一、 Tomcat 8 安装目标</p>
+<ul>
 <li>安装环境：rebhat 6.1 (linux通用)</li>
 <li>安装目录：<code>/opt/extra/apache-tomcat-8.5.31</code></li>
 <li>java目录：<code>/opt/java/jdk1.8.0_91</code></li>
 <li>启动方式：<code>service tomcat8 start</code> 或者 </li>
 <li>配置：<ul>
-<li>更新端口，可以增加数据源，配置系统服务，jvm参数，安全考虑，服务器优化<h2 id="2-Tomcat-8-安装"><a href="#2-Tomcat-8-安装" class="headerlink" title="2. Tomcat 8 安装"></a>2. Tomcat 8 安装</h2><h3 id="2-1-安装来源以及简介"><a href="#2-1-安装来源以及简介" class="headerlink" title="2.1. 安装来源以及简介"></a>2.1. 安装来源以及简介</h3></li>
+<li>更新端口，可以增加数据源，配置系统服务，jvm参数，安全考虑，服务器优化<br>#二、 Tomcat 8 安装<h2 id="2-1-安装来源以及简介"><a href="#2-1-安装来源以及简介" class="headerlink" title="2.1. 安装来源以及简介"></a>2.1. 安装来源以及简介</h2></li>
 </ul>
 </li>
 <li>官网：<a href="http://tomcat.apache.org/" target="_blank" rel="external">http://tomcat.apache.org/</a></li>
 <li>Tomcat 8 官网下载：<a href="http://tomcat.apache.org/download-80.cgi" target="_blank" rel="external">http://tomcat.apache.org/download-80.cgi</a></li>
-<li>此时（20180524） Tomcat 8 最新版本为：<code>apache-tomcat-8.5.31.zip</code><h3 id="2-2-安装目录"><a href="#2-2-安装目录" class="headerlink" title="2.2. 安装目录"></a>2.2. 安装目录</h3></li>
+<li>此时（20180524） Tomcat 8 最新版本为：<code>apache-tomcat-8.5.31.zip</code><h2 id="2-2-安装目录"><a href="#2-2-安装目录" class="headerlink" title="2.2. 安装目录"></a>2.2. 安装目录</h2></li>
 <li>我个人习惯 <code>/opt</code> 目录下创建一个目录 <code>software</code> 用来存放各种软件安装包；在 <code>/opt</code> 目录下创建一个 <code>apps</code> 用来存放各种解压后的软件包，下面的讲解也都是基于此习惯。不过下面是公司的按照我会按照<code>opt/extra/</code>来。<ul>
 <li>压缩包解压：<code>unzip apache-tomcat-8.5.31.zip</code></li>
-<li>移到解压出来文件夹到 /usr 下：<code>mv apache-tomcat-8.5.31/ /opt/extra/</code><h3 id="2-3-更改端口（可跳过，根据需要修改）"><a href="#2-3-更改端口（可跳过，根据需要修改）" class="headerlink" title="2.3. 更改端口（可跳过，根据需要修改）"></a>2.3. 更改端口（可跳过，根据需要修改）</h3></li>
+<li>移到解压出来文件夹到 /usr 下：<code>mv apache-tomcat-8.5.31/ /opt/extra/</code><h2 id="2-3-更改端口（可跳过，根据需要修改）"><a href="#2-3-更改端口（可跳过，根据需要修改）" class="headerlink" title="2.3. 更改端口（可跳过，根据需要修改）"></a>2.3. 更改端口（可跳过，根据需要修改）</h2></li>
 </ul>
 </li>
 <li>1) 编辑tomcat配置文件<ul>
@@ -475,11 +476,11 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8209"</span> <span class="attr">protocol</span>=<span class="string">"AJP/1.3"</span> <span class="attr">redirectPort</span>=<span class="string">"8643"</span> /&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="2-4-配置数据源（可跳过，根据需要修改）"><a href="#2-4-配置数据源（可跳过，根据需要修改）" class="headerlink" title="2.4. 配置数据源（可跳过，根据需要修改）"></a>2.4. 配置数据源（可跳过，根据需要修改）</h3><ul>
+<h2 id="2-4-配置jdbc数据源（可跳过，根据需要修改）"><a href="#2-4-配置jdbc数据源（可跳过，根据需要修改）" class="headerlink" title="2.4. 配置jdbc数据源（可跳过，根据需要修改）"></a>2.4. 配置jdbc数据源（可跳过，根据需要修改）</h2><ul>
 <li>1) 更新端口<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Resource</span> <span class="attr">name</span>=<span class="string">"test/b2c"</span> <span class="attr">auth</span>=<span class="string">"Container"</span> <span class="attr">driverClassName</span>=<span class="string">"oracle.jdbc.driver.OracleDriver"</span> <span class="attr">defaultAutoCommit</span>=<span class="string">"true"</span></span></div><div class="line">             <span class="attr">maxActive</span>=<span class="string">"20"</span> <span class="attr">maxWait</span>=<span class="string">"10000"</span> <span class="attr">initialSize</span>=<span class="string">"10"</span> <span class="attr">maxTotal</span>=<span class="string">"20"</span> <span class="attr">maxIdle</span>=<span class="string">"10"</span></div><div class="line">             <span class="attr">username</span>=<span class="string">"test_app_1"</span> <span class="attr">password</span>=<span class="string">"**********"</span> <span class="attr">type</span>=<span class="string">"javax.sql.DataSource"</span></div><div class="line">             <span class="attr">url</span>=<span class="string">"jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=xxx.xxx.xx1)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=xxx.xxx.xx2)(PORT=1521))(LOAD_BALANCE=on)(FAILOVER=on))(CONNECT_DATA=(SERVICE_NAME=service.xxxx.com)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC))))"</span> </div><div class="line">             <span class="attr">validationQuery</span>=<span class="string">"SELECT sysdate FROM dual"</span> <span class="attr">testOnBorrow</span>=<span class="string">"true"</span>/&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="2-5-配置启动脚本服务（官方推荐在-CATALINA-BASE-bin-setenv-sh）"><a href="#2-5-配置启动脚本服务（官方推荐在-CATALINA-BASE-bin-setenv-sh）" class="headerlink" title="2.5. 配置启动脚本服务（官方推荐在$CATALINA_BASE/bin/setenv.sh）"></a>2.5. 配置启动脚本服务（官方推荐在$CATALINA_BASE/bin/setenv.sh）</h3><ul>
+<h2 id="2-5-配置启动脚本服务（官方推荐在-CATALINA-BASE-bin-setenv-sh）"><a href="#2-5-配置启动脚本服务（官方推荐在-CATALINA-BASE-bin-setenv-sh）" class="headerlink" title="2.5. 配置启动脚本服务（官方推荐在$CATALINA_BASE/bin/setenv.sh）"></a>2.5. 配置启动脚本服务（官方推荐在$CATALINA_BASE/bin/setenv.sh）</h2><ul>
 <li><p>1) 为避免环境冲突，配置变量。编辑<code>vim /opt/extra/apache-tomcat-8.5.31/bin/setenv.sh</code>  然后保存 (可选, 官方recommended这种。 或者在catalina.sh在配置文件的可编辑内容最上面添加)</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">JRE_HOME</span>=/opt/java/jdk1.<span class="number">8.0</span>_91</div><div class="line"><span class="attr">CATALINA_PID</span>=<span class="string">"$CATALINA_BASE/tomcat.pid"</span></div><div class="line"><span class="comment"># CATALINA_PID=`cd ../;pwd`/tomcat.pid  #或者这种方式 # 可以不用   JAVA_HOME=/opt/java/jdk1.8.0_91</span></div></pre></td></tr></table></figure>
 </li>
@@ -493,7 +494,7 @@
 <li><p>关闭 <code>sh  /opt/extra/apache-tomcat-8.5.31/bin/shutdown.sh</code>  或者   <code>cat /opt/extra/apache-tomcat-8.5.31/tomcat.pid | xargs kill -9</code> 或者  /opt/extra/apache-tomcat-8.5.31/bin/catalina.sh stop</p>
 </li>
 <li><p>查看服务 <code>ps aux|grep tomcat|grep -v grep</code></p>
-<h3 id="2-6-配置系统服务"><a href="#2-6-配置系统服务" class="headerlink" title="2.6. 配置系统服务"></a>2.6. 配置系统服务</h3></li>
+<h2 id="2-6-配置系统服务"><a href="#2-6-配置系统服务" class="headerlink" title="2.6. 配置系统服务"></a>2.6. 配置系统服务</h2></li>
 </ul>
 </li>
 <li><p>1)  安装步骤一： 配置JSVC服务启动方式 （为什么要用，查看附录说明）</p>
@@ -508,12 +509,12 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CATALINA_BASE=$CATALINA_HOME</div><div class="line">cd $CATALINA_HOME</div><div class="line">./bin/jsvc \</div><div class="line">    -classpath $CATALINA_HOME/bin/bootstrap.jar:$CATALINA_HOME/bin/tomcat-juli.jar \</div><div class="line">    -outfile $CATALINA_BASE/logs/catalina.out \</div><div class="line">    -errfile $CATALINA_BASE/logs/catalina.err \</div><div class="line">    -Dcatalina.home=$CATALINA_HOME \</div><div class="line">    -Dcatalina.base=$CATALINA_BASE \</div><div class="line">    -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager \</div><div class="line">    -Djava.util.logging.config.file=$CATALINA_BASE/conf/logging.properties \</div><div class="line">    org.apache.catalina.startup.Bootstrap</div></pre></td></tr></table></figure>
 </li>
 <li><p>3) 我们可以用daemon.sh脚本。其启动脚本的命令大致如下：找到如下内容</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">test ".$TOMCAT_USER" = . &amp;&amp; TOMCAT_USER=tomcat</div><div class="line"><span class="meta">#</span> Set JAVA_HOME to working JDK or JRE</div><div class="line"><span class="meta">#</span> 修改TOMCAT_USER=tomcat为你指定用来运行tomcat的用户名，去除JAVA_HOME前的注释（即“#”号），并设置为JDK的所在目录。</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">test ".$TOMCAT_USER" = . &amp;&amp; TOMCAT_USER=tomcat</div><div class="line"><span class="meta">#</span><span class="bash"> Set JAVA_HOME to working JDK or JRE</span></div><div class="line"><span class="meta">#</span><span class="bash"> 修改TOMCAT_USER=tomcat为你指定用来运行tomcat的用户名，去除JAVA_HOME前的注释（即“<span class="comment">#”号），并设置为JDK的所在目录。</span></span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>在文件靠前位置的注释中加入下面的内容</p>
-<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> chkconfig: - 80 20</div></pre></td></tr></table></figure>
-</code></pre><h3 id="2-7-配置日志"><a href="#2-7-配置日志" class="headerlink" title="2.7. 配置日志"></a>2.7. 配置日志</h3><ul>
+<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> chkconfig: - 80 20</span></div></pre></td></tr></table></figure>
+</code></pre><h2 id="2-7-配置日志"><a href="#2-7-配置日志" class="headerlink" title="2.7. 配置日志"></a>2.7. 配置日志</h2><ul>
 <li><p>1)  在 Apache Tomcat 上运行的 Web 应用可以使用</p>
 <ul>
 <li>系统日志 API，java.util.logging。</li>
@@ -778,7 +779,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tomcat-8-安装和配置、优化"><span class="nav-number">1.</span> <span class="nav-text">Tomcat 8 安装和配置、优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Tomcat-8-安装目标"><span class="nav-number">1.1.</span> <span class="nav-text">1. Tomcat 8 安装目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Tomcat-8-安装"><span class="nav-number">1.2.</span> <span class="nav-text">2. Tomcat 8 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-安装来源以及简介"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. 安装来源以及简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-安装目录"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. 安装目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-更改端口（可跳过，根据需要修改）"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. 更改端口（可跳过，根据需要修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-配置数据源（可跳过，根据需要修改）"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. 配置数据源（可跳过，根据需要修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-配置启动脚本服务（官方推荐在-CATALINA-BASE-bin-setenv-sh）"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. 配置启动脚本服务（官方推荐在$CATALINA_BASE/bin/setenv.sh）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-配置系统服务"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6. 配置系统服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-配置日志"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.7. 配置日志</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">2.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解答环境"><span class="nav-number">2.1.</span> <span class="nav-text">解答环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资料"><span class="nav-number">2.2.</span> <span class="nav-text">资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-安装来源以及简介"><span class="nav-number">1.</span> <span class="nav-text">2.1. 安装来源以及简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-安装目录"><span class="nav-number">2.</span> <span class="nav-text">2.2. 安装目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-更改端口（可跳过，根据需要修改）"><span class="nav-number">3.</span> <span class="nav-text">2.3. 更改端口（可跳过，根据需要修改）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-配置jdbc数据源（可跳过，根据需要修改）"><span class="nav-number">4.</span> <span class="nav-text">2.4. 配置jdbc数据源（可跳过，根据需要修改）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-配置启动脚本服务（官方推荐在-CATALINA-BASE-bin-setenv-sh）"><span class="nav-number">5.</span> <span class="nav-text">2.5. 配置启动脚本服务（官方推荐在$CATALINA_BASE/bin/setenv.sh）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-配置系统服务"><span class="nav-number">6.</span> <span class="nav-text">2.6. 配置系统服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-配置日志"><span class="nav-number">7.</span> <span class="nav-text">2.7. 配置日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number"></span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解答环境"><span class="nav-number">1.</span> <span class="nav-text">解答环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资料"><span class="nav-number">2.</span> <span class="nav-text">资料</span></a></li></ol></div>
             
 
           </div>
